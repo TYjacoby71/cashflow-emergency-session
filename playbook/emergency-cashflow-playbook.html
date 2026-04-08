@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Emergency Cashflow Playbook</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 11pt; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #1a1a1a;
+    background: #fff;
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 48px;
+  }
+  h1 { font-size: 2.4rem; font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; }
+  h2 { font-size: 1.6rem; font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; }
+  h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.35rem; }
+  h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+  p  { margin-bottom: 0.9rem; }
+  ul, ol { padding-left: 1.4rem; margin-bottom: 0.9rem; }
+  li { margin-bottom: 0.3rem; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+  :root {
+    --ink: #1a1a1a;
+    --brand: #0a3d2b;
+    --brand-light: #e8f4ef;
+    --accent: #d4802a;
+    --muted: #6b6b6b;
+    --rule: #d0d0d0;
+    --bg-soft: #f7f7f5;
+  }
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0 60px;
+    page-break-after: always;
+  }
+  .cover-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  }
+  .cover h1 { font-size: 3rem; margin-bottom: 0.6rem; color: var(--brand); }
+  .cover-sub { font-size: 1.1rem; color: var(--muted); max-width: 520px; margin-bottom: 2rem; }
+  .cover-meta { display: flex; gap: 2.5rem; margin-top: 2.5rem; border-top: 2px solid var(--brand); padding-top: 1.4rem; }
+  .cover-stat strong { display: block; font-size: 1.9rem; font-weight: 900; color: var(--brand); }
+  .cover-stat span { font-size: 0.8rem; color: var(--muted); font-family: 'Arial', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+  .cover-guarantee { margin-top: 2.5rem; padding: 1rem 1.25rem; background: var(--brand-light); border-left: 4px solid var(--brand); font-size: 0.9rem; font-family: 'Arial', sans-serif; }
+  .page-break { page-break-before: always; }
+  .section { margin-bottom: 2.5rem; }
+  .section-label { font-family: 'Arial', sans-serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  .chapter-header { background: var(--brand); color: #fff; padding: 1.5rem 1.75rem; margin: 0 -48px 2rem -48px; }
+  .chapter-header .chapter-num { font-family: 'Arial', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.3rem; }
+  .chapter-header h2 { color: #fff; font-size: 1.5rem; margin-bottom: 0; }
+  .callout { background: var(--bg-soft); border-left: 4px solid var(--brand); padding: 0.9rem 1.1rem; margin: 1rem 0 1.2rem; font-family: 'Arial', sans-serif; font-size: 0.9rem; }
+  .callout.accent { border-left-color: var(--accent); }
+  .callout strong { color: var(--brand); }
+  .callout.accent strong { color: var(--accent); }
+  .diagnostic-table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-family: 'Arial', sans-serif; font-size: 0.88rem; }
+  .diagnostic-table th { background: var(--brand); color: #fff; padding: 0.55rem 0.7rem; text-align: left; font-weight: 700; font-size: 0.8rem; }
+  .diagnostic-table td { padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .diagnostic-table tr:nth-child(even) td { background: var(--bg-soft); }
+  .play-card { border: 1.5px solid var(--rule); border-top: 4px solid var(--brand); padding: 1.4rem 1.5rem; margin-bottom: 2rem; background: #fff; page-break-inside: avoid; }
+  .play-card .play-number { font-family: 'Arial', sans-serif; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.3rem; }
+  .play-card h3 { color: var(--brand); font-size: 1.25rem; margin-bottom: 0.2rem; }
+  .play-card .play-tagline { font-family: 'Arial', sans-serif; font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+  .play-section-label { font-family: 'Arial', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 1rem 0 0.3rem; }
+  .checklist { list-style: none; padding-left: 0; margin-bottom: 0.9rem; }
+  .checklist li { padding: 0.3rem 0 0.3rem 1.8rem; position: relative; border-bottom: 1px solid var(--rule); font-family: 'Arial', sans-serif; font-size: 0.88rem; }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before { content: '\2610'; position: absolute; left: 0; color: var(--brand); font-size: 1rem; top: 0.25rem; }
+  .script-box { background: #1a1a1a; color: #e8e8e8; padding: 1.1rem 1.3rem; font-family: 'Courier New', monospace; font-size: 0.82rem; line-height: 1.65; margin: 0.6rem 0 1.1rem; border-radius: 4px; white-space: pre-wrap; word-break: break-word; page-break-inside: avoid; }
+  .script-box .script-label { font-family: 'Arial', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; display: block; }
+  .day-block { margin-bottom: 1.8rem; page-break-inside: avoid; }
+  .day-header { background: var(--brand); color: #fff; padding: 0.5rem 1rem; display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.6rem; }
+  .day-header .day-label { font-family: 'Arial', sans-serif; font-size: 0.85rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+  .day-header .day-theme { font-size: 0.85rem; opacity: 0.85; }
+  .day-tasks { list-style: none; padding: 0; }
+  .day-tasks li { display: flex; gap: 0.7rem; padding: 0.45rem 0; border-bottom: 1px solid var(--rule); font-family: 'Arial', sans-serif; font-size: 0.88rem; align-items: flex-start; }
+  .day-tasks li:last-child { border-bottom: none; }
+  .task-time { color: var(--accent); font-weight: 700; min-width: 80px; font-size: 0.8rem; padding-top: 0.1rem; }
+  .task-owner { color: var(--brand); font-weight: 700; font-size: 0.75rem; background: var(--brand-light); padding: 0.1rem 0.4rem; border-radius: 2px; white-space: nowrap; align-self: flex-start; margin-top: 0.1rem; }
+  .task-desc { flex: 1; }
+  @media print {
+    body { padding: 30px 40px; font-size: 10.5pt; }
+    .chapter-header { margin: 0 -40px 2rem -40px; }
+    a { color: inherit; text-decoration: none; }
+    .script-box, .chapter-header, .day-header, .diagnostic-table th, .cover-guarantee, .callout { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .play-card, .day-block, .script-box { page-break-inside: avoid; }
+  }
+  @page { size: letter; margin: 0.75in 0.85in; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Readyclaw &middot; Confidential &middot; $47 Digital Edition</div>
+  <h1>Emergency<br>Cashflow<br>Playbook</h1>
+  <p class="cover-sub">5 executable cash plays, proven outreach scripts, and a 72-hour action map &mdash; built for founders who already have assets and need the fastest path to revenue.</p>
+  <div class="cover-meta">
+    <div class="cover-stat"><strong>5</strong><span>Cash Plays</span></div>
+    <div class="cover-stat"><strong>72h</strong><span>Action Window</span></div>
+    <div class="cover-stat"><strong>15+</strong><span>Outreach Scripts</span></div>
+    <div class="cover-stat"><strong>$0</strong><span>New Overhead</span></div>
+  </div>
+  <div class="cover-guarantee">
+    <strong>Guarantee:</strong> If you don't find at least three executable cash plays in this playbook, request a full refund &mdash; no questions asked.
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Introduction</div>
+    <h2>How to Use This Playbook</h2>
+  </div>
+  <p>This is not a strategy document. It's an execution toolkit. Every section is designed to be read once and acted on immediately.</p>
+  <p><strong>This playbook works if you have at least one of these:</strong></p>
+  <ul>
+    <li>An existing offer (service, product, or expertise)</li>
+    <li>A list &mdash; email subscribers, past buyers, social followers, or a CRM</li>
+    <li>Partners, affiliates, or referral relationships (even dormant ones)</li>
+    <li>Inbound demand you haven't fully converted</li>
+  </ul>
+  <p><strong>This playbook will not help if:</strong></p>
+  <ul>
+    <li>You have no existing offer and no existing audience</li>
+    <li>You need a business model, not cashflow acceleration</li>
+    <li>You can't move fast &mdash; these plays require 2&ndash;4 hours of execution per day for 3 days</li>
+  </ul>
+  <div class="callout">
+    <strong>The three-step process:</strong><br>
+    <strong>Step 1 &rarr;</strong> Complete the Cash Play Selector (Chapter 1) to identify your best-fit play.<br>
+    <strong>Step 2 &rarr;</strong> Read only that play's chapter (Chapters 2&ndash;6). Execute the launch checklist.<br>
+    <strong>Step 3 &rarr;</strong> Run the 72-hour action map (Chapter 7) in parallel from Day 1.
+  </div>
+  <h3>A note on timing</h3>
+  <p>The 72-hour window is real. Each play is designed to generate a response &mdash; a payment, a booked call, a confirmed order &mdash; within 72 hours of launch. If you're still in "research mode" at hour 24, you've misread the playbook. Launch imperfectly, iterate in real-time.</p>
+  <hr>
+  <h3>What each chapter contains</h3>
+  <ul>
+    <li><strong>Chapter 1 &mdash; Cash Play Selector:</strong> A diagnostic matrix to pick your play based on your current assets</li>
+    <li><strong>Chapters 2&ndash;6 &mdash; The 5 Plays:</strong> Full execution guide for each play, including scripts and checklists</li>
+    <li><strong>Chapter 7 &mdash; 72-Hour Action Map:</strong> Day-by-day calendar with tasks, owners, and go/no-go checkpoints</li>
+    <li><strong>Appendix A &mdash; AR &amp; Expense Triage:</strong> Parallel cashflow levers to run alongside your play</li>
+  </ul>
+</div>
+
+<!-- CHAPTER 1 - SELECTOR -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 1</div>
+    <h2>Cash Play Selector &mdash; Find Your Fastest Lane</h2>
+  </div>
+  <p>Don't try to run all five plays at once. The selector below identifies the single play most likely to generate cash in 72 hours based on what you <em>already have</em> right now.</p>
+  <p><strong>Instructions:</strong> Scan each row. Circle every "Yes" that applies. The play with the most Yes answers is your primary play. If two plays tie, pick the one with the lowest friction for your situation.</p>
+  <table class="diagnostic-table">
+    <thead>
+      <tr>
+        <th>What do you have right now?</th>
+        <th>Play 1<br>Partner Blitz</th>
+        <th>Play 2<br>Audit Upsell</th>
+        <th>Play 3<br>List Reactivation</th>
+        <th>Play 4<br>Fast Upsell</th>
+        <th>Play 5<br>Inbound Sprint</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Warm contacts, affiliates, or referral partners (even dormant)</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>An existing service you deliver to clients</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Clients or operators struggling with workflow / automation</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>Email list or past buyer list (even if cold)</td>
+        <td></td><td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>A product or service that can be upsold immediately</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Inbound leads, traffic, or inquiries you haven't fully worked</td>
+        <td></td><td></td><td></td><td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Social following or community (even lightly engaged)</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Ability to close deals in 24&ndash;48h (no long sales cycle)</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Can fulfil a scoped deliverable in 1&ndash;2 weeks</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout accent">
+    <strong>Minimum viable assets per play:</strong><br>
+    Play 1 (Partner Blitz) &mdash; need at least 5 warm contacts you can message today<br>
+    Play 2 (Audit Upsell) &mdash; need at least 1 existing client in an operator/agency context<br>
+    Play 3 (List Reactivation) &mdash; need at least 100 email addresses or 50 past buyers<br>
+    Play 4 (Fast Upsell) &mdash; need at least 1 current client or recent buyer<br>
+    Play 5 (Inbound Sprint) &mdash; need at least 3 unconverted inbound leads in the last 30 days
+  </div>
+  <h3>My selected play: ____________________________________</h3>
+  <p>Circle it, write it here, and go directly to that chapter. Come back to the 72-hour map in Chapter 7 to schedule execution.</p>
+</div>
+
+<!-- CHAPTER 2 - PARTNER BLITZ -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 2 &middot; Play 1</div>
+    <h2>High-Ticket Partner Blitz</h2>
+  </div>
+  <div class="play-card">
+    <div class="play-number">Play 1 of 5</div>
+    <h3>High-Ticket Partner Blitz</h3>
+    <p class="play-tagline">Revive warm contacts, affiliates, and referral partners with a short, high-urgency outreach sequence. Target: $1,000&ndash;$10,000+ per deal.</p>
+    <div class="play-section-label">Best for</div>
+    <ul>
+      <li>Founders with an existing service business and a network of warm contacts</li>
+      <li>Anyone who has done a deal, referral, or collaboration in the past 18 months</li>
+      <li>People who have a high-value offer but haven't been actively selling</li>
+    </ul>
+    <div class="play-section-label">The mechanics</div>
+    <p>You're reactivating relationships, not cold-calling strangers. The play works because warm contacts already trust you &mdash; they just need a specific ask with a clear reason to act now.</p>
+    <p><strong>Target list:</strong> 10&ndash;25 contacts. Prioritize: (1) Past clients who got results, (2) Referral partners who sent you business, (3) Warm prospects who went cold.</p>
+    <div class="play-section-label">Launch checklist</div>
+    <ul class="checklist">
+      <li>Build your target list: 10&ndash;25 names, sorted by warmth (hottest first)</li>
+      <li>Write one sentence describing the specific value you're offering right now</li>
+      <li>Customize Message 1 for your top 5 contacts (send today)</li>
+      <li>Schedule follow-up Message 2 for non-responders (send Hour 30&ndash;36)</li>
+      <li>Send closing Message 3 to anyone who engaged but didn't book (Hour 60)</li>
+      <li>Have a booking link or phone number ready before you send Message 1</li>
+      <li>Track responses: Name / Sent / Response / Status</li>
+    </ul>
+  </div>
+  <h3>Scripts</h3>
+  <div class="play-section-label">Message 1 &mdash; Initial Outreach (send via SMS, DM, or personal email)</div>
+  <div class="script-box"><span class="script-label">SCRIPT 1A &middot; PAST CLIENT</span>Hey [Name] &mdash; quick one. I'm taking on 2 new [service type] clients this month with a specific focus on [specific outcome]. You came to mind immediately because of [specific thing you did together / result they got].
+
+Are you in a position where this would be useful right now, or do you know someone who is?
+
+Either way &mdash; appreciate you. [Your name]</div>
+  <div class="script-box"><span class="script-label">SCRIPT 1B &middot; REFERRAL PARTNER</span>Hey [Name] &mdash; hope things are moving well on your end.
+
+I'm doing a targeted push this week and wanted to reach out personally. I'm looking for [specific type of client] who need [specific outcome] fast. 2&ndash;3 spots this month.
+
+You tend to know people in this situation. If anyone comes to mind, I'm happy to handle the conversation from there and make sure you're looked after. Worth a quick chat?
+
+[Your name]</div>
+  <div class="script-box"><span class="script-label">SCRIPT 1C &middot; WARM PROSPECT (WENT COLD)</span>Hey [Name] &mdash; it's been a while. I'm not going to pretend otherwise.
+
+I've been thinking about the conversation we had about [topic]. I have something specific now that I think is a better fit for your situation &mdash; tighter scope, faster delivery, clearer outcome.
+
+Would it be worth 20 minutes this week to revisit? No pressure either way.
+
+[Your name]</div>
+  <div class="play-section-label">Message 2 &mdash; Follow-Up (Hour 30&ndash;36 for non-responders)</div>
+  <div class="script-box"><span class="script-label">SCRIPT 1D &middot; FOLLOW-UP</span>Hey [Name] &mdash; just following up on my last message. I know things get busy.
+
+Still have 2 spots open. If the timing is off, totally understand. If there's something here &mdash; even a 10-minute call to see if it makes sense &mdash; I'm available [day] and [day] this week.
+
+[Your name]</div>
+  <div class="play-section-label">Message 3 &mdash; Close or Release (Hour 60)</div>
+  <div class="script-box"><span class="script-label">SCRIPT 1E &middot; CLOSE</span>Hey [Name] &mdash; last message on this. I'm closing out these spots by end of week.
+
+If you want in, the next step is just [book a call / reply YES / click this link]. If not &mdash; no problem at all, I won't bring it up again.
+
+[Your name]</div>
+  <div class="callout">
+    <strong>Urgency framing that works:</strong> "Closing spots by end of week" beats "limited availability" every time. Be specific. Have a real reason &mdash; even if that reason is "I want to start delivery this month."
+  </div>
+</div>
+
+<!-- CHAPTER 3 - AUDIT UPSELL -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 3 &middot; Play 2</div>
+    <h2>Automation Audit Upsell</h2>
+  </div>
+  <div class="play-card">
+    <div class="play-number">Play 2 of 5</div>
+    <h3>Automation Audit Upsell</h3>
+    <p class="play-tagline">Turn existing operator pain into an immediate fixed-fee service. Scoped deliverable, clear outcome, fast to sell. Target: $500&ndash;$3,000 per audit.</p>
+    <div class="play-section-label">Best for</div>
+    <ul>
+      <li>Agencies, consultants, or operators who work with business clients</li>
+      <li>Anyone with access to clients who run workflows (email, CRM, fulfillment, ops)</li>
+      <li>People who can identify process waste and propose a fix</li>
+    </ul>
+    <div class="play-section-label">The offer structure</div>
+    <p>The Automation Audit is a fixed-fee, scoped assessment. You're selling a <em>specific deliverable</em>: a documented map of where the client is leaking time or money, with prioritized recommendations.</p>
+    <ul>
+      <li><strong>Deliverable:</strong> Workflow audit report &mdash; 5&ndash;10 pages, prioritized findings</li>
+      <li><strong>Timeline:</strong> 3&ndash;5 business days from kickoff</li>
+      <li><strong>Price:</strong> $500&ndash;$3,000 depending on complexity and your positioning</li>
+      <li><strong>Upsell path:</strong> "We can implement Fix #1 for [price] &mdash; want to start there?"</li>
+    </ul>
+    <div class="play-section-label">Launch checklist</div>
+    <ul class="checklist">
+      <li>Identify 3&ndash;5 current or past clients who could benefit (operators with messy workflows)</li>
+      <li>Set your audit price (start at $750 if unsure)</li>
+      <li>Write 1 sentence describing what pain the audit solves for them specifically</li>
+      <li>Send Message 2A to each client today</li>
+      <li>Prepare a simple intake form or questionnaire (5&ndash;8 questions) for kickoff</li>
+      <li>Draft a 1-page "Audit Overview" doc you can send when they say yes</li>
+      <li>Follow up with non-responders at Hour 36 using Message 2B</li>
+    </ul>
+  </div>
+  <h3>Scripts</h3>
+  <div class="play-section-label">Outreach to existing clients</div>
+  <div class="script-box"><span class="script-label">SCRIPT 2A &middot; CLIENT OUTREACH</span>Hey [Name] &mdash; quick question for you.
+
+We've been working together on [what you do], and I've noticed a pattern with operators at your stage: there are usually 2&ndash;3 workflow gaps that are costing time and revenue that nobody's looked at closely.
+
+I'm running a limited number of Automation Audits this month &mdash; a fixed-fee, 3&ndash;5 day assessment where I map your current workflow, flag the friction points, and give you a prioritized fix list.
+
+Price is $[X] flat. Deliverable is a clear action doc &mdash; not a proposal for more work.
+
+Would this be useful to you right now? Happy to tell you more if so.
+
+[Your name]</div>
+  <div class="script-box"><span class="script-label">SCRIPT 2B &middot; FOLLOW-UP</span>Hey [Name] &mdash; following up on my message about the Automation Audit.
+
+If timing is off, no problem. But if you've been meaning to clean up [specific workflow area], this is the fastest way to get a clear picture of where to start.
+
+I have [X] spots left this month. Reply with "interested" and I'll send the details.
+
+[Your name]</div>
+  <div class="callout accent">
+    <strong>Use a real constraint:</strong> "I have 3 audit slots this month and they're filling" is true the moment you decide it is. Set a real capacity limit and honor it.
+  </div>
+  <div class="play-section-label">Audit report structure (what to deliver)</div>
+  <ol>
+    <li><strong>Executive summary</strong> &mdash; 3 bullets: current state, main leak, top recommendation</li>
+    <li><strong>Workflow map</strong> &mdash; visual or written description of current process</li>
+    <li><strong>Findings</strong> &mdash; 5&ndash;8 friction points ranked by impact and ease of fix</li>
+    <li><strong>Priority fix list</strong> &mdash; top 3 actions with estimated time/cost to implement</li>
+    <li><strong>Next step offer</strong> &mdash; optional implementation engagement (your upsell)</li>
+  </ol>
+</div>
+
+<!-- CHAPTER 4 - LIST REACTIVATION -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 4 &middot; Play 3</div>
+    <h2>List + Offer Reactivation</h2>
+  </div>
+  <div class="play-card">
+    <div class="play-number">Play 3 of 5</div>
+    <h3>List + Offer Reactivation</h3>
+    <p class="play-tagline">Pull revenue from dormant leads, past buyers, or neglected communities with a sharper, time-limited ask. Target: $500&ndash;$5,000+ per campaign run.</p>
+    <div class="play-section-label">Best for</div>
+    <ul>
+      <li>Founders with an email list of 100+ subscribers (even cold)</li>
+      <li>Anyone with past buyers who haven't been re-engaged in 60+ days</li>
+      <li>Community owners, newsletter operators, or social creators with an audience</li>
+    </ul>
+    <div class="play-section-label">The mechanics</div>
+    <p>A dead list is not a dead asset. Lists go cold because the sender stopped showing up with value and clear offers. A 3-email reactivation sequence with a sharp offer can convert at 1&ndash;5% even on cold lists.</p>
+    <p><strong>The math:</strong> 500 subscribers &times; 2% conversion &times; $97 offer = ~$970 in 72 hours. 1,000 subscribers &times; 2% &times; $297 offer = ~$5,940.</p>
+    <div class="play-section-label">Launch checklist</div>
+    <ul class="checklist">
+      <li>Export and clean your list (remove hard bounces, duplicates)</li>
+      <li>Pick one offer &mdash; the simplest, most specific thing you can sell right now</li>
+      <li>Write the subject lines for all 3 emails before writing the body</li>
+      <li>Send Email 1 today &mdash; no preamble, no apologies</li>
+      <li>Send Email 2 at Hour 24 &mdash; a different angle, not a repeat</li>
+      <li>Send Email 3 at Hour 48 &mdash; hard close, segment after this</li>
+      <li>Have a payment link live before sending Email 1</li>
+    </ul>
+  </div>
+  <h3>Email Sequence Scripts</h3>
+  <div class="play-section-label">Email 1 &mdash; The Direct Offer (send today)</div>
+  <div class="script-box"><span class="script-label">EMAIL 1 &middot; SUBJECT: The fastest way to [outcome]</span>Subject: The fastest way to [specific outcome]
+
+[First name] &mdash;
+
+I'll keep this short.
+
+I put together [offer name] for [specific type of person] who need [specific outcome] and want it working in [timeframe].
+
+Here's what it includes:
+- [Specific benefit 1]
+- [Specific benefit 2]
+- [Specific benefit 3]
+
+Price: $[X] &mdash; access is instant.
+
+&rarr; [LINK] Get access now
+
+This is a short run. [Number] spots / closing [day].
+
+&mdash; [Your name]
+
+P.S. If this isn't for you, feel free to ignore. If you know someone who needs [outcome], forward this.</div>
+  <div class="play-section-label">Email 2 &mdash; Reframe (Hour 24)</div>
+  <div class="script-box"><span class="script-label">EMAIL 2 &middot; SUBJECT: Different angle on [topic]</span>Subject: What most [audience type] get wrong about [topic]
+
+[First name] &mdash;
+
+Most [audience type] trying to [goal] focus on [wrong thing] and miss [right thing].
+
+The founders/operators I've seen get [result] fast all have one thing in common: [insight].
+
+That's exactly what [offer name] covers: [short description &mdash; 2 sentences].
+
+If you were on the fence after yesterday's email, here's the page with the full details:
+
+&rarr; [LINK]
+
+[X] spots remain. [Day] is the cutoff.
+
+&mdash; [Your name]</div>
+  <div class="play-section-label">Email 3 &mdash; Hard Close (Hour 48)</div>
+  <div class="script-box"><span class="script-label">EMAIL 3 &middot; SUBJECT: Closing tonight</span>Subject: Closing tonight &mdash; [offer name]
+
+[First name] &mdash;
+
+Last call.
+
+[Offer name] closes tonight at [time zone]. After that, I'm moving on and this won't be available at this price.
+
+If you've been thinking about it: &rarr; [LINK]
+
+If not &mdash; no worries. I won't mention it again.
+
+&mdash; [Your name]</div>
+  <div class="callout">
+    <strong>Subject line principles:</strong> Specificity beats cleverness. "The fastest way to recover $5k in AR" outperforms "A note from me." Test your subject lines by asking: "Would I open this if a stranger sent it?"
+  </div>
+</div>
+
+<!-- CHAPTER 5 - FAST UPSELL -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 5 &middot; Play 4</div>
+    <h2>Fast Upsell to Current Clients</h2>
+  </div>
+  <div class="play-card">
+    <div class="play-number">Play 4 of 5</div>
+    <h3>Fast Upsell to Current Clients</h3>
+    <p class="play-tagline">Sell something adjacent, faster, or deeper to people who already trust you. Target: $250&ndash;$5,000 per client.</p>
+    <div class="play-section-label">Best for</div>
+    <ul>
+      <li>Service providers with 2+ active clients</li>
+      <li>Founders with recent buyers (past 90 days)</li>
+      <li>Anyone who has an adjacent offer or can package one in 24 hours</li>
+    </ul>
+    <div class="play-section-label">The mechanics</div>
+    <p>Selling to existing clients costs zero in trust-building. The conversation starts at a completely different baseline. The key is having a <em>specific, scoped offer</em> &mdash; not a vague "I could also help with&hellip;"</p>
+    <p><strong>Upsell offer types that close fast:</strong></p>
+    <ul>
+      <li><strong>Acceleration add-on:</strong> "For $X, I'll do [faster/more] on what we're already doing"</li>
+      <li><strong>Adjacent service:</strong> "I now offer [related service] &mdash; here's how it applies to you"</li>
+      <li><strong>Done-for-you upgrade:</strong> "I can take this off your plate completely for $X/month"</li>
+      <li><strong>Intensive session:</strong> "3-hour working session to solve [specific problem] &mdash; $X"</li>
+    </ul>
+    <div class="play-section-label">Launch checklist</div>
+    <ul class="checklist">
+      <li>List every current client and recent buyer (last 90 days)</li>
+      <li>For each, write 1 sentence: what are they struggling with right now?</li>
+      <li>Match a specific offer to that pain &mdash; don't pitch general capabilities</li>
+      <li>Send Message 4A by end of today &mdash; personal, not a broadcast</li>
+      <li>If they engage, send the specific offer in writing within 2 hours</li>
+      <li>Have a way to collect payment immediately (Stripe link, invoice)</li>
+      <li>Follow up once at Hour 36 if no response</li>
+    </ul>
+  </div>
+  <h3>Scripts</h3>
+  <div class="play-section-label">Initial upsell message</div>
+  <div class="script-box"><span class="script-label">SCRIPT 4A &middot; UPSELL PITCH</span>Hey [Name] &mdash;
+
+While we've been working on [current engagement], I noticed [specific observation about their situation &mdash; a gap, a risk, an opportunity].
+
+I have something that addresses exactly that &mdash; [offer name in 5 words or less]. It's a [format: session / add-on / deliverable], scoped to [what it covers], priced at $[X].
+
+Given where you are right now, I think it's worth it. Want me to send you the details?
+
+[Your name]</div>
+  <div class="script-box"><span class="script-label">SCRIPT 4B &middot; FOLLOW-UP (HOUR 36)</span>Hey [Name] &mdash; following up on my message about [offer name].
+
+I know you're busy. If the timing is off, let me know and I'll hold the spot until [date].
+
+If you want to move forward, I can have a payment link to you in 10 minutes.
+
+[Your name]</div>
+  <div class="play-section-label">When they say yes</div>
+  <ol>
+    <li>Send a Stripe payment link or invoice immediately &mdash; while they're warm</li>
+    <li>Confirm the kickoff date in the same message</li>
+    <li>Keep the confirmation email to 3&ndash;4 sentences maximum</li>
+  </ol>
+  <div class="callout accent">
+    <strong>The cardinal rule of upselling:</strong> Offer something specific, not something general. "I could help you with your email marketing" closes at 5%. "Here's a 3-email win-back sequence for your current drop-off problem, $400, done by Friday" closes at 40%+.
+  </div>
+</div>
+
+<!-- CHAPTER 6 - INBOUND SPRINT -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 6 &middot; Play 5</div>
+    <h2>Inbound Conversion Sprint</h2>
+  </div>
+  <div class="play-card">
+    <div class="play-number">Play 5 of 5</div>
+    <h3>Inbound Conversion Sprint</h3>
+    <p class="play-tagline">Work your unconverted inbound leads systematically &mdash; DMs, form fills, calls that went nowhere, and content engagement. Target: 1&ndash;3 deals from leads already in your pipeline.</p>
+    <div class="play-section-label">Best for</div>
+    <ul>
+      <li>Founders who generate inbound but let leads go cold</li>
+      <li>Anyone with 3+ unconverted leads in the last 30&ndash;60 days</li>
+      <li>People active on social or content who get DMs but don't follow up</li>
+    </ul>
+    <div class="play-section-label">The mechanics</div>
+    <p>Inbound leads are the warmest possible prospects &mdash; they came to you. Most founders let them go cold because there was no structured follow-through. This play fixes that with a 72-hour sprint through your existing pipeline.</p>
+    <p><strong>Sources to mine:</strong></p>
+    <ul>
+      <li>Unanswered DMs or comments on social posts from last 30 days</li>
+      <li>Contact form submissions you haven't fully followed up on</li>
+      <li>Discovery calls that "went to follow up" and never closed</li>
+      <li>Email thread leads who went quiet after initial exchange</li>
+    </ul>
+    <div class="play-section-label">Launch checklist</div>
+    <ul class="checklist">
+      <li>List every unconverted inbound from the last 30&ndash;60 days</li>
+      <li>Score each: Hot (engaged, had a call), Warm (responded once), Cold (never responded)</li>
+      <li>Start with Hot leads &mdash; send Message 5A today</li>
+      <li>Send Warm leads Message 5B at Hour 12</li>
+      <li>Send Cold leads Message 5C at Hour 24</li>
+      <li>For anyone who engages: book a call or send a specific offer within 2 hours</li>
+      <li>Track every outreach: Name / Source / Status / Last Contact / Next Step</li>
+    </ul>
+  </div>
+  <h3>Scripts</h3>
+  <div class="play-section-label">Hot leads &mdash; had a call, went quiet</div>
+  <div class="script-box"><span class="script-label">SCRIPT 5A &middot; HOT LEAD FOLLOW-UP</span>Hey [Name] &mdash; I know it's been [timeframe] since we talked about [topic/their problem].
+
+I'm not sure what happened on your end, but I wanted to reach back out because I think [specific reason: the timing might be better / I have something more targeted / this is about to close].
+
+If you're still open to it, I'd love to pick up where we left off. Even just a quick 15-minute check-in.
+
+Here's my calendar: [link]
+
+[Your name]</div>
+  <div class="play-section-label">Warm leads &mdash; responded but never booked</div>
+  <div class="script-box"><span class="script-label">SCRIPT 5B &middot; WARM LEAD REACTIVATION</span>Hey [Name] &mdash; you reached out about [topic] a while back. Not sure if your situation has changed, but I'm in a position to help right now with [specific offer/outcome].
+
+I have [X] spots available this month. If the timing is finally right, I'd love to talk.
+
+Happy to do a quick 20-minute call this week &mdash; here's a link: [link]
+
+If the timing still isn't right, no worries at all. Just wanted to follow through.
+
+[Your name]</div>
+  <div class="play-section-label">Cold leads &mdash; contacted you but never engaged</div>
+  <div class="script-box"><span class="script-label">SCRIPT 5C &middot; COLD LEAD REACTIVATION</span>Hey [Name] &mdash; you reached out about [topic / via your form] a while ago.
+
+I'm following up to see if you're still looking for help with [their stated problem or context clue]. If yes, I can make myself available this week.
+
+If the situation has changed, just let me know and I'll close this out.
+
+[Your name]</div>
+  <div class="callout">
+    <strong>Note on cold leads:</strong> Script 5C is intentionally short. Long messages signal desperation. A cold lead who sees a short, confident message is more likely to re-engage than one who gets a three-paragraph sales pitch.
+  </div>
+</div>
+
+<!-- CHAPTER 7 - 72-HOUR MAP -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 7</div>
+    <h2>72-Hour Action Map</h2>
+  </div>
+  <p>This is your execution calendar. Run it in parallel with whichever play you selected. The map assumes you started at 8am on Day 1. Adjust times to your schedule but keep the <em>sequence</em> exactly as shown.</p>
+  <div class="callout accent">
+    <strong>Go / No-Go rule:</strong> At the end of each day, run the check: "Did I send the outreach I planned? Did I respond to every lead within 2 hours?" If No on either &mdash; wake up earlier tomorrow. The play only works if you're faster than your leads' attention span.
+  </div>
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-label">Day 1</span>
+      <span class="day-theme">Launch &amp; Seed</span>
+    </div>
+    <ul class="day-tasks">
+      <li>
+        <span class="task-time">8:00&ndash;9:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Build your target list (10&ndash;25 names for Plays 1&ndash;4; pipeline audit for Play 5). Quality list = quality results. Do not skip this step.</span>
+      </li>
+      <li>
+        <span class="task-time">9:00&ndash;10:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Customize Message 1 for your top 5 highest-priority contacts. Personalization takes 3 minutes per message &mdash; do not batch-send generic versions.</span>
+      </li>
+      <li>
+        <span class="task-time">10:00&ndash;11:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Send Message 1 to your full list. SMS/DM for warm contacts; email for list plays. Send individually, not BCC.</span>
+      </li>
+      <li>
+        <span class="task-time">11:00&ndash;12:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Confirm your payment infrastructure is live: Stripe link, invoice template, booking link. Test it. Don't let a broken checkout kill a sale.</span>
+      </li>
+      <li>
+        <span class="task-time">12:00&ndash;17:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Respond to every reply within 2 hours. Set a phone alarm. For any "interested" reply, send a specific offer or book a call within the same hour.</span>
+      </li>
+      <li>
+        <span class="task-time">17:00&ndash;18:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Day 1 debrief: log responses in your tracker. Count: Sent / Replied / Interested / Booked. Set up Day 2 follow-up list.</span>
+      </li>
+    </ul>
+  </div>
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-label">Day 2</span>
+      <span class="day-theme">Follow-Up &amp; Convert</span>
+    </div>
+    <ul class="day-tasks">
+      <li>
+        <span class="task-time">8:00&ndash;9:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Review Day 1 tracker. Prioritize: (1) People who said "interested" but haven't paid, (2) People who engaged but didn't book, (3) Everyone who didn't reply.</span>
+      </li>
+      <li>
+        <span class="task-time">9:00&ndash;10:30</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Send Message 2 to all non-responders from Day 1. Use the follow-up scripts from your play chapter. 3&ndash;4 sentences max.</span>
+      </li>
+      <li>
+        <span class="task-time">10:30&ndash;12:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Conduct any calls booked from Day 1. Have a 1-page offer summary open during calls. Close on the call &mdash; do not say "I'll send you a proposal."</span>
+      </li>
+      <li>
+        <span class="task-time">12:00&ndash;13:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">&#9873; GO / NO-GO CHECK: Have you sent at least 10 outreach messages? Have you received at least 2 replies? If not &mdash; diagnose now. Wrong list? Wrong message? Wrong timing?</span>
+      </li>
+      <li>
+        <span class="task-time">13:00&ndash;17:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Respond to all replies within 2 hours. For "yes" responses: collect payment immediately. For "maybe" responses: give them a deadline (tomorrow at 5pm).</span>
+      </li>
+      <li>
+        <span class="task-time">17:00&ndash;18:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Day 2 debrief: Update tracker. Log revenue collected. Set final follow-up list for Day 3.</span>
+      </li>
+    </ul>
+  </div>
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-label">Day 3</span>
+      <span class="day-theme">Close &amp; Capture</span>
+    </div>
+    <ul class="day-tasks">
+      <li>
+        <span class="task-time">8:00&ndash;9:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Review Day 2 tracker. Build your Day 3 close list: everyone who engaged but hasn't paid. These are your highest-leverage conversations today.</span>
+      </li>
+      <li>
+        <span class="task-time">9:00&ndash;10:30</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Send Message 3 (hard close) to all "maybe" or unresponsive contacts. Use the close scripts from your play chapter. Be direct &mdash; this is the last message.</span>
+      </li>
+      <li>
+        <span class="task-time">10:30&ndash;14:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Conduct any remaining calls. Close hard. If someone wants to "think about it" &mdash; give them a 2-hour window before the offer closes. That's respect for both your time.</span>
+      </li>
+      <li>
+        <span class="task-time">14:00&ndash;16:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Final payment collection push. Follow up on any outstanding payment links. Send a "link expires at 5pm" message to everyone who clicked but didn't pay.</span>
+      </li>
+      <li>
+        <span class="task-time">16:00&ndash;17:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Close the campaign. Stop outreach. Log final numbers: Total contacted / Replied / Calls held / Deals closed / Revenue collected.</span>
+      </li>
+      <li>
+        <span class="task-time">17:00&ndash;18:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Post-mortem: Which play worked? What would you do differently? What's the next play you'll run? Document while it's fresh.</span>
+      </li>
+    </ul>
+  </div>
+  <div class="callout">
+    <strong>After 72 hours:</strong> Move anyone who didn't convert to a long-nurture list. Do not keep following up past Day 3. Your next campaign with them starts fresh, not as a continuation of this one.
+  </div>
+</div>
+
+<!-- APPENDIX A - AR & EXPENSE TRIAGE -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Appendix A</div>
+    <h2>Immediate Cashflow Levers: AR &amp; Expense Triage</h2>
+  </div>
+  <p>While you run your chosen play, work these two levers in parallel. They don't require outreach &mdash; just action on things that are already yours.</p>
+
+  <h3>Accounts Receivable Acceleration</h3>
+  <p>If you have outstanding invoices, this is the fastest cash available to you &mdash; faster than any new sale.</p>
+  <div class="play-section-label">AR triage checklist</div>
+  <ul class="checklist">
+    <li>Pull a full AR report right now: who owes you, how much, and how overdue</li>
+    <li>Identify any invoice 14+ days overdue &mdash; contact those clients today, not tomorrow</li>
+    <li>Offer a 2% early-pay discount to clients 30&ndash;60 days out if you need cash now</li>
+    <li>For clients 60+ days overdue: call first, then email. A 2-minute call resolves more than 3 emails</li>
+    <li>Switch all future invoices to Net 7 or Net 14 (not Net 30+)</li>
+    <li>Add a late payment clause to contracts going forward (1.5%/month is standard)</li>
+    <li>Use Stripe or similar to accept card &mdash; don't gate payment on bank transfers alone</li>
+  </ul>
+  <div class="script-box"><span class="script-label">AR RECOVERY CALL SCRIPT</span>Hey [Name] &mdash; quick call about invoice #[X] for $[amount], which shows outstanding as of [date].
+
+I just want to make sure everything is OK on your end and nothing got lost in transit.
+
+Can we sort out payment today? I can resend the invoice, set up a payment plan, or take a card over the phone &mdash; whatever is easiest for you.
+
+[Listen. Agree on a specific date and method. Confirm in writing same day.]</div>
+
+  <hr>
+  <h3>Expense Triage Framework</h3>
+  <p>Every dollar you don't spend is a dollar you don't have to earn. Run this triage in parallel with your play &mdash; it takes 2 hours and extends your runway immediately.</p>
+  <div class="play-section-label">The 3-bucket sort</div>
+  <p>Pull every recurring expense from your bank or accounting tool. Sort into three buckets:</p>
+  <ul>
+    <li><strong>Bucket 1 &mdash; Revenue-Generating:</strong> Tools or spend directly tied to making sales (CRM, ad spend, core SaaS). Keep.</li>
+    <li><strong>Bucket 2 &mdash; Operational (essential):</strong> Payroll, hosting, core infrastructure. Keep, but look for cheaper alternatives at renewal.</li>
+    <li><strong>Bucket 3 &mdash; Nice-to-Have:</strong> Everything else. Cancel or pause today.</li>
+  </ul>
+  <div class="callout accent">
+    <strong>Typical Bucket 3 finds:</strong> Unused SaaS subscriptions, duplicate tools (2 project managers, 2 analytics platforms), premium plans where free tiers work fine, conference/event commitments that can be deferred, agency retainers on pause.
+  </div>
+  <div class="play-section-label">Expense triage checklist</div>
+  <ul class="checklist">
+    <li>Export every recurring charge from bank statements (last 30 days)</li>
+    <li>Tag each as Bucket 1, 2, or 3</li>
+    <li>Cancel all Bucket 3 items today &mdash; do not wait for the billing cycle</li>
+    <li>Negotiate or downgrade all Bucket 2 items at next renewal</li>
+    <li>Calculate your new monthly burn &mdash; update your runway estimate</li>
+    <li>Set a calendar reminder to repeat this triage in 30 days</li>
+  </ul>
+  <div class="callout">
+    <strong>The 30-day rule:</strong> If you haven't actively used a tool in 30 days, cancel it. You can always re-subscribe. The cost of missing it for one month is almost always lower than the cost of the subscription itself.
+  </div>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="page-break"></div>
+<div class="section" style="padding-top:4rem;text-align:center;">
+  <div style="color:#0a3d2b;font-size:2.5rem;font-weight:900;margin-bottom:1rem;">You have everything you need.</div>
+  <p style="color:#6b6b6b;font-size:1.1rem;max-width:480px;margin:0 auto 2rem;">The plays are ready. The scripts are ready. The 72-hour map is clear.<br>The only variable left is whether you start today.</p>
+  <div style="border-top:2px solid #0a3d2b;padding-top:1.5rem;display:inline-block;text-align:left;min-width:360px;">
+    <p style="font-family:'Arial',sans-serif;font-size:0.8rem;color:#6b6b6b;margin-bottom:0.3rem;">SELECTED PLAY</p>
+    <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:1.5rem;">____________________________________</p>
+    <p style="font-family:'Arial',sans-serif;font-size:0.8rem;color:#6b6b6b;margin-bottom:0.3rem;">DAY 1 START DATE</p>
+    <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:1.5rem;">____________________________________</p>
+    <p style="font-family:'Arial',sans-serif;font-size:0.8rem;color:#6b6b6b;margin-bottom:0.3rem;">REVENUE TARGET (72H)</p>
+    <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;">$___________________________________</p>
+  </div>
+  <div style="margin-top:3rem;font-family:'Arial',sans-serif;font-size:0.75rem;color:#9b9b9b;">
+    Emergency Cashflow Playbook &mdash; Readyclaw &middot; Digital Edition &middot; $47 One-Time
+  </div>
+</div>
+
+</body>
+</html>
