@@ -1,0 +1,15 @@
+[build]
+  publish = "src"
+  functions = "netlify/functions"
+
+# Netlify Forms is active — configure email notifications in the Netlify dashboard
+# under Site Settings > Forms > Form notifications for "emergency-session-prebooking"
+
+# Stripe webhook endpoint (register in Stripe dashboard once deployed):
+#   https://<site>.netlify.app/.netlify/functions/stripe-webhook
+# Required env vars (set in Netlify dashboard > Site settings > Environment):
+#   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, EMAIL_API_KEY, FROM_EMAIL, DOWNLOAD_URL
+#
+# Stripe product: prod_UIdeG7Tr41hRjx (Emergency Cashflow Playbook, $47)
+# Stripe price:   price_1TK2NCFU1PN3YsywokmbnLwL
+# Payment link:   https://buy.stripe.com/14AbJ180Nff4dMQ94f3ZK08
