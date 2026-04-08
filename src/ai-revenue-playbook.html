@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The AI Revenue Playbook</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 11pt; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #1a1a1a;
+    background: #fff;
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 48px;
+  }
+  h1 { font-size: 2.4rem; font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; }
+  h2 { font-size: 1.6rem; font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; }
+  h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.35rem; }
+  h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+  p  { margin-bottom: 0.9rem; }
+  ul, ol { padding-left: 1.4rem; margin-bottom: 0.9rem; }
+  li { margin-bottom: 0.3rem; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+  :root {
+    --ink: #1a1a1a;
+    --brand: #0a3d2b;
+    --brand-light: #e8f4ef;
+    --accent: #d4802a;
+    --muted: #6b6b6b;
+    --rule: #d0d0d0;
+    --bg-soft: #f7f7f5;
+  }
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0 60px;
+    page-break-after: always;
+  }
+  .cover-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  }
+  .cover h1 { font-size: 3rem; margin-bottom: 0.6rem; color: var(--brand); }
+  .cover-sub { font-size: 1.1rem; color: var(--muted); max-width: 520px; margin-bottom: 2rem; }
+  .cover-meta { display: flex; gap: 2.5rem; margin-top: 2.5rem; border-top: 2px solid var(--brand); padding-top: 1.4rem; }
+  .cover-stat strong { display: block; font-size: 1.9rem; font-weight: 900; color: var(--brand); }
+  .cover-stat span { font-size: 0.8rem; color: var(--muted); font-family: 'Arial', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+  .cover-guarantee { margin-top: 2.5rem; padding: 1rem 1.25rem; background: var(--brand-light); border-left: 4px solid var(--brand); font-size: 0.9rem; font-family: 'Arial', sans-serif; }
+  .page-break { page-break-before: always; }
+  .section { margin-bottom: 2.5rem; }
+  .section-label { font-family: 'Arial', sans-serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  .chapter-header { background: var(--brand); color: #fff; padding: 1.5rem 1.75rem; margin: 0 -48px 2rem -48px; }
+  .chapter-header .chapter-num { font-family: 'Arial', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.3rem; }
+  .chapter-header h2 { color: #fff; font-size: 1.5rem; margin-bottom: 0; }
+  .callout { background: var(--bg-soft); border-left: 4px solid var(--brand); padding: 0.9rem 1.1rem; margin: 1rem 0 1.2rem; font-family: 'Arial', sans-serif; font-size: 0.9rem; }
+  .callout.accent { border-left-color: var(--accent); }
+  .callout strong { color: var(--brand); }
+  .callout.accent strong { color: var(--accent); }
+  .diagnostic-table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-family: 'Arial', sans-serif; font-size: 0.88rem; }
+  .diagnostic-table th { background: var(--brand); color: #fff; padding: 0.55rem 0.7rem; text-align: left; font-weight: 700; font-size: 0.8rem; }
+  .diagnostic-table td { padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .diagnostic-table tr:nth-child(even) td { background: var(--bg-soft); }
+  .play-card { border: 1.5px solid var(--rule); border-top: 4px solid var(--brand); padding: 1.4rem 1.5rem; margin-bottom: 2rem; background: #fff; page-break-inside: avoid; }
+  .play-card .play-number { font-family: 'Arial', sans-serif; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.3rem; }
+  .play-card h3 { color: var(--brand); font-size: 1.25rem; margin-bottom: 0.2rem; }
+  .play-card .play-tagline { font-family: 'Arial', sans-serif; font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+  .play-section-label { font-family: 'Arial', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 1rem 0 0.3rem; }
+  .checklist { list-style: none; padding-left: 0; margin-bottom: 0.9rem; }
+  .checklist li { padding: 0.3rem 0 0.3rem 1.8rem; position: relative; border-bottom: 1px solid var(--rule); font-family: 'Arial', sans-serif; font-size: 0.88rem; }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before { content: '\2610'; position: absolute; left: 0; color: var(--brand); font-size: 1rem; top: 0.25rem; }
+  .script-box { background: #1a1a1a; color: #e8e8e8; padding: 1.1rem 1.3rem; font-family: 'Courier New', monospace; font-size: 0.82rem; line-height: 1.65; margin: 0.6rem 0 1.1rem; border-radius: 4px; white-space: pre-wrap; word-break: break-word; page-break-inside: avoid; }
+  .script-box .script-label { font-family: 'Arial', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; display: block; }
+  .day-block { margin-bottom: 1.8rem; page-break-inside: avoid; }
+  .day-header { background: var(--brand); color: #fff; padding: 0.5rem 1rem; display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.6rem; }
+  .day-header .day-label { font-family: 'Arial', sans-serif; font-size: 0.85rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+  .day-header .day-theme { font-size: 0.85rem; opacity: 0.85; }
+  .day-tasks { list-style: none; padding: 0; }
+  .day-tasks li { display: flex; gap: 0.7rem; padding: 0.45rem 0; border-bottom: 1px solid var(--rule); font-family: 'Arial', sans-serif; font-size: 0.88rem; align-items: flex-start; }
+  .day-tasks li:last-child { border-bottom: none; }
+  .task-time { color: var(--accent); font-weight: 700; min-width: 80px; font-size: 0.8rem; padding-top: 0.1rem; }
+  .task-owner { color: var(--brand); font-weight: 700; font-size: 0.75rem; background: var(--brand-light); padding: 0.1rem 0.4rem; border-radius: 2px; white-space: nowrap; align-self: flex-start; margin-top: 0.1rem; }
+  .task-desc { flex: 1; }
+  .tool-cta { background: var(--brand); color: #fff; padding: 1rem 1.25rem; margin: 1.2rem 0; font-family: 'Arial', sans-serif; font-size: 0.9rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .tool-cta .tool-name { font-weight: 900; font-size: 1rem; }
+  .tool-cta .tool-url { font-size: 0.82rem; opacity: 0.85; text-decoration: underline; color: #fff; }
+  .tool-cta .tool-desc { font-size: 0.82rem; opacity: 0.85; flex: 1; }
+  @media print {
+    body { padding: 30px 40px; font-size: 10.5pt; }
+    .chapter-header { margin: 0 -40px 2rem -40px; }
+    a { color: inherit; text-decoration: none; }
+    .script-box, .chapter-header, .day-header, .diagnostic-table th, .cover-guarantee, .callout, .tool-cta { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .play-card, .day-block, .script-box { page-break-inside: avoid; }
+  }
+  @page { size: letter; margin: 0.75in 0.85in; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Readyclaw &middot; Confidential &middot; $47 Digital Edition</div>
+  <h1>The AI<br>Revenue<br>Playbook</h1>
+  <p class="cover-sub">5 AI revenue plays, real implementation guides, and a 72-hour launch sprint &mdash; built for $500K&ndash;$5M businesses ready to make money with AI right now.</p>
+  <div class="cover-meta">
+    <div class="cover-stat"><strong>5</strong><span>AI Plays</span></div>
+    <div class="cover-stat"><strong>$398K+</strong><span>Credits Available</span></div>
+    <div class="cover-stat"><strong>$50K+</strong><span>Typical Waste Found</span></div>
+    <div class="cover-stat"><strong>$0</strong><span>New Overhead</span></div>
+  </div>
+  <div class="cover-guarantee">
+    <strong>Guarantee:</strong> If you don&rsquo;t identify at least three concrete AI revenue opportunities using this playbook, request a full refund &mdash; no questions asked.
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Introduction</div>
+    <h2>How to Use This Playbook</h2>
+  </div>
+  <p>This is not a strategy document about AI. It&rsquo;s a revenue execution toolkit. Every play is designed to be read once and acted on immediately &mdash; with specific tools, real numbers, and direct links to get moving today.</p>
+  <p><strong>This playbook works if you have at least one of these:</strong></p>
+  <ul>
+    <li>A team doing repetitive, manual work (support, ops, reporting, outreach)</li>
+    <li>SaaS or cloud spend of $500+/month (you&rsquo;re likely overpaying or eligible for free credits)</li>
+    <li>Disconnected tools that don&rsquo;t talk to each other</li>
+    <li>Revenue processes that rely on humans for things AI can handle today</li>
+  </ul>
+  <p><strong>This playbook will not help if:</strong></p>
+  <ul>
+    <li>You have no existing business, team, or workflow</li>
+    <li>You&rsquo;re looking for a business model, not AI implementation</li>
+    <li>You can&rsquo;t act fast &mdash; these plays require 2&ndash;4 hours of focused execution to get started</li>
+  </ul>
+  <div class="callout">
+    <strong>The three-step process:</strong><br>
+    <strong>Step 1 &rarr;</strong> Complete the AI Play Selector (Chapter 1) to identify your highest-leverage play.<br>
+    <strong>Step 2 &rarr;</strong> Read only that play&rsquo;s chapter (Chapters 2&ndash;6). Execute the launch checklist.<br>
+    <strong>Step 3 &rarr;</strong> Run the 72-hour launch sprint (Chapter 7) in parallel from Day 1.
+  </div>
+  <h3>A note on urgency</h3>
+  <p>The AI advantage window is real and it is closing. Every month you delay deploying AI is another month your competitors reduce their cost base, automate their outreach, and integrate tools you&rsquo;re still running manually. The plays in this book work. The only question is whether you start this week or next quarter.</p>
+  <hr>
+  <h3>What each chapter contains</h3>
+  <ul>
+    <li><strong>Chapter 1 &mdash; AI Play Selector:</strong> A diagnostic to identify which AI play fits your current situation</li>
+    <li><strong>Chapters 2&ndash;6 &mdash; The 5 Plays:</strong> Full execution guide for each play, with implementation steps and tool CTAs</li>
+    <li><strong>Chapter 7 &mdash; 72-Hour Launch Sprint:</strong> Day-by-day action map to get your first AI system live</li>
+    <li><strong>Appendix A &mdash; AI Credit Stack:</strong> How to access $398K+ in free AI and SaaS credits right now</li>
+  </ul>
+  <p><strong>Each play in this book links to one of our tools.</strong> That&rsquo;s intentional. We built these tools because we ran these plays ourselves. You can use the playbook without the tools &mdash; but the tools make execution 10x faster.</p>
+</div>
+
+<!-- CHAPTER 1 - SELECTOR -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 1</div>
+    <h2>AI Play Selector &mdash; Find Your Highest-Leverage Play</h2>
+  </div>
+  <p>Don&rsquo;t try to run all five plays at once. The selector below identifies the single play most likely to generate measurable revenue or cost reduction in the next 30 days, based on what you <em>already have</em> right now.</p>
+  <p><strong>Instructions:</strong> Scan each row. Check every &ldquo;Yes&rdquo; that applies. The play with the most Yes answers is your primary play. If two tie, pick the one with the lowest friction.</p>
+  <table class="diagnostic-table">
+    <thead>
+      <tr>
+        <th>What do you have right now?</th>
+        <th>Play 1<br>Agent Launch</th>
+        <th>Play 2<br>Credit Stack</th>
+        <th>Play 3<br>Ops Audit</th>
+        <th>Play 4<br>Stack Integrate</th>
+        <th>Play 5<br>Revenue System</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A team doing repetitive manual tasks (support, data entry, reporting, outreach)</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+      </tr>
+      <tr>
+        <td>SaaS or cloud spend of $500+/month</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Active AWS, Google Cloud, or Azure account</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Tools that don&rsquo;t integrate with each other (CRM, email, ops, billing)</td>
+        <td></td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Revenue processes that rely on humans for things AI can handle (follow-ups, scheduling, triage)</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+      </tr>
+      <tr>
+        <td>A startup or growth-stage company (under 5 years old)</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Multiple AI tools or point solutions that aren&rsquo;t connected</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Clear workflow bottlenecks in fulfillment, sales, or support</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td></td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+      </tr>
+      <tr>
+        <td>Ability to test and deploy a new system in under 2 weeks</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+        <td style="text-align:center;font-weight:700;color:#0a3d2b">&#10003;</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout accent">
+    <strong>Minimum viable assets per play:</strong><br>
+    Play 1 (Agent Launch) &mdash; need at least 1 repetitive team workflow you can describe in 3 sentences<br>
+    Play 2 (Credit Stack) &mdash; need at least $500/mo in SaaS spend or an active cloud account<br>
+    Play 3 (Ops Audit) &mdash; need at least 1 client or internal workflow you can map end-to-end<br>
+    Play 4 (Stack Integrate) &mdash; need at least 2 tools that share data but don&rsquo;t connect<br>
+    Play 5 (Revenue System) &mdash; need at least 2 plays above already working or ready to launch
+  </div>
+  <h3>My selected play: ____________________________________</h3>
+  <p>Write it here and go directly to that chapter. Come back to the 72-hour launch sprint in Chapter 7 to schedule execution.</p>
+</div>
+
+<!-- CHAPTER 2 - AGENT LAUNCH -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 2 &middot; Play 1</div>
+    <h2>Deploy AI Agents to Handle Work</h2>
+  </div>
+  <div class="play-card">
+    <div class="play-number">Play 1 of 5</div>
+    <h3>Deploy AI Agents to Handle Work</h3>
+    <p class="play-tagline">Replace repetitive human tasks with AI agents configured for your specific workflows. Target: 10&ndash;40 hours/week recovered per agent deployed, equivalent to $2,000&ndash;$8,000/month in labor cost.</p>
+    <div class="play-section-label">Best for</div>
+    <ul>
+      <li>Founders whose team spends significant time on manual, repetitive tasks</li>
+      <li>Agencies or operators with repeatable client deliverables (reports, outreach, triage)</li>
+      <li>Anyone paying for human work that follows a predictable pattern</li>
+    </ul>
+    <div class="play-section-label">The mechanics</div>
+    <p>An AI agent is not a chatbot. It&rsquo;s a configured system with a persona, a set of skills, and a defined task scope. The key is identifying a <em>specific, bounded workflow</em> &mdash; not deploying AI broadly and hoping something sticks.</p>
+    <p><strong>What agents can handle today:</strong></p>
+    <ul>
+      <li>Inbound lead triage and qualification (route to human only when ready)</li>
+      <li>Client onboarding data collection and document prep</li>
+      <li>Weekly reporting and status updates from your tools</li>
+      <li>Outreach follow-up sequences (email, Slack, CRM)</li>
+      <li>Support ticket triage, FAQ resolution, and escalation routing</li>
+    </ul>
+    <div class="play-section-label">Launch checklist</div>
+    <ul class="checklist">
+      <li>Identify 1&ndash;3 workflows your team does that follow a consistent pattern (write it out in 5 steps)</li>
+      <li>Measure the current time cost: how many hours/week, at what hourly equivalent?</li>
+      <li>Define the agent&rsquo;s scope: what it handles, what triggers escalation to a human</li>
+      <li>Configure the agent with the right persona, tools, and task checklist</li>
+      <li>Run 3&ndash;5 test scenarios before going live &mdash; edge cases are where agents break</li>
+      <li>Set a measurement baseline: response time, error rate, tasks completed per week</li>
+      <li>Review agent output weekly for the first month; refine the configuration</li>
+    </ul>
+  </div>
+  <h3>Implementation Guide</h3>
+  <div class="play-section-label">Step 1 &mdash; Map the workflow</div>
+  <div class="script-box"><span class="script-label">WORKFLOW MAPPING TEMPLATE</span>Workflow name: [e.g., "Inbound lead qualification"]
+
+Trigger: [What starts the workflow? e.g., "New form fill from website"]
+
+Steps (in order):
+1. [First thing that happens]
+2. [Second thing]
+3. [Third thing — if/else branches here?]
+4. [What output is produced?]
+5. [Who receives the output?]
+
+Time cost: [X] hours/week at [Y] hourly rate = $[Z]/week
+Frequency: [Daily / Weekly / Per customer / etc.]
+
+Human judgment required: [Yes/No — if yes, where in the workflow?]
+Error consequences if agent gets it wrong: [Low / Medium / High]</div>
+  <div class="play-section-label">Step 2 &mdash; Define the agent configuration</div>
+  <p>Every agent needs three things before it can work: a <strong>persona</strong> (who it is, what it knows), a <strong>skill set</strong> (what tools and actions it has access to), and a <strong>checklist</strong> (the specific steps it follows for each task).</p>
+  <ul>
+    <li><strong>Persona:</strong> Give the agent a role title and context. "You are a lead qualification specialist for [Company]. Your job is to assess inbound leads and route them appropriately."</li>
+    <li><strong>Skills:</strong> What tools can it read from / write to? CRM? Email? Slack? Define these explicitly.</li>
+    <li><strong>Checklist:</strong> The step-by-step procedure it follows. If the workflow map in Step 1 is good, the checklist writes itself.</li>
+  </ul>
+  <div class="play-section-label">Step 3 &mdash; Test before launch</div>
+  <div class="script-box"><span class="script-label">TEST SCENARIO CHECKLIST</span>Before deploying any agent, run these 5 tests:
+
+Test 1: Normal case — does it handle the standard workflow correctly?
+Test 2: Edge case A — what happens with incomplete input?
+Test 3: Edge case B — what happens with ambiguous input?
+Test 4: Escalation trigger — does it correctly route to a human when needed?
+Test 5: Output format — is the output usable by whoever receives it?
+
+Pass rate required before go-live: 5/5 on escalation, 4/5 on normal/edge cases.</div>
+  <div class="callout">
+    <strong>The compound effect:</strong> One agent handling lead triage saves 15 hours/week. That&rsquo;s 60 hours/month your team reclaims for higher-leverage work. At a $50/hour equivalent, that&rsquo;s $3,000/month in recovered capacity &mdash; from one configuration.
+  </div>
+  <div class="tool-cta">
+    <div>
+      <div class="tool-name">OpenClaw &mdash; AI Agent Launcher</div>
+      <div class="tool-desc">Pre-configured AI agents with personas, skills, and checklists. One-click deploy, no terminal required.</div>
+    </div>
+    <a class="tool-url" href="https://readyclaw.nodenetwork.ai">readyclaw.nodenetwork.ai</a>
+  </div>
+</div>
+
+<!-- CHAPTER 3 - CREDIT STACK -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 3 &middot; Play 2</div>
+    <h2>Stack AI Credits &amp; Cut Your Burn</h2>
+  </div>
+  <div class="play-card">
+    <div class="play-number">Play 2 of 5</div>
+    <h3>Stack AI Credits &amp; Cut Your Burn</h3>
+    <p class="play-tagline">Access $398K+ in available AI and SaaS credits most founders leave on the table. Target: $10,000&ndash;$100,000+ in credit value depending on your profile and cloud spend.</p>
+    <div class="play-section-label">Best for</div>
+    <ul>
+      <li>Startups and growth-stage businesses under 5 years old</li>
+      <li>Anyone paying for AWS, Google Cloud, or Azure without startup credits applied</li>
+      <li>Founders spending $500+/month on SaaS who have never applied to vendor programs</li>
+    </ul>
+    <div class="play-section-label">The mechanics</div>
+    <p>Every major AI and cloud platform runs a startup credit program. Most founders never apply. The ones who do apply get access to the same infrastructure &mdash; at zero cost for 12&ndash;24 months. We matched 47 of 53 programs for our own business. The average realistic value was $398K.</p>
+    <p><strong>The top-tier programs (apply to all of these):</strong></p>
+    <ul>
+      <li><strong>AWS Activate:</strong> Up to $100,000 in AWS credits. Application takes 20 minutes. Approval is 48&ndash;72 hours.</li>
+      <li><strong>Google for Startups:</strong> Up to $200,000 in Google Cloud credits. Requires VC backing or incubator membership for highest tier; $2K available without.</li>
+      <li><strong>Microsoft for Startups:</strong> Up to $150,000 in Azure credits plus OpenAI access. Available to companies with fewer than 25 employees and under 10 years old.</li>
+      <li><strong>Anthropic &amp; OpenAI startup programs:</strong> Significant API credits for AI-native companies. Often paired with advisory access.</li>
+      <li><strong>Stripe Atlas / HubSpot for Startups:</strong> SaaS credits that offset your operational costs directly.</li>
+    </ul>
+    <div class="play-section-label">Launch checklist</div>
+    <ul class="checklist">
+      <li>Pull your last 3 months of cloud and SaaS invoices &mdash; this is your baseline</li>
+      <li>Identify which cloud platforms you&rsquo;re paying for without credits applied</li>
+      <li>Create accounts at AWS, Google Cloud, and Azure if you don&rsquo;t have them &mdash; qualifying requires an account</li>
+      <li>Apply to AWS Activate first (fastest approval, highest near-term value for most companies)</li>
+      <li>Apply to Microsoft for Startups within the same week</li>
+      <li>Apply to Google for Startups &mdash; find your highest eligibility tier before applying</li>
+      <li>Log every application: platform / applied / status / value / expiry</li>
+      <li>Set calendar reminders 60 days before credit expiry &mdash; unused credits cannot be extended</li>
+    </ul>
+  </div>
+  <h3>Application Guide</h3>
+  <div class="play-section-label">How to maximize your approval rate</div>
+  <div class="script-box"><span class="script-label">CREDIT APPLICATION FRAMEWORK</span>For every program, answer these questions before applying:
+
+1. Am I within the eligibility window?
+   (Most programs: under 5 years old, under $X revenue, not yet Series B)
+
+2. Do I have an accelerator or VC connection?
+   (Even a Y Combinator application or SBIR grant unlocks higher tiers)
+
+3. What is my intended use case?
+   (Be specific: "training ML models for document classification"
+   beats "building an AI startup." Vague applications get rejected or downgraded.)
+
+4. Do I have a domain-based email?
+   (Personal Gmail addresses reduce approval rates significantly)
+
+5. What is my monthly burn on their platform?
+   (If $0: explain the roadmap. If $500+: use the invoice as evidence.)</div>
+  <div class="play-section-label">Credit stacking order (recommended)</div>
+  <ol>
+    <li><strong>Week 1:</strong> Apply to AWS Activate and Microsoft for Startups simultaneously</li>
+    <li><strong>Week 2:</strong> Apply to Google for Startups. Apply to Anthropic and OpenAI programs.</li>
+    <li><strong>Week 3:</strong> Apply to SaaS programs (HubSpot, Stripe, Notion, Intercom, etc.)</li>
+    <li><strong>Week 4:</strong> Follow up on pending applications. Begin migrating spend to credited platforms.</li>
+  </ol>
+  <div class="callout accent">
+    <strong>The arbitrage play:</strong> Once you have credits, run your AI workloads on the credited platform and redirect the saved cash to revenue-generating spend. $50K in AWS credits frees $50K to reinvest in sales, product, or people.
+  </div>
+  <div class="tool-cta">
+    <div>
+      <div class="tool-name">Runway Intel Pack &mdash; Programs Matcher</div>
+      <div class="tool-desc">We matched 47 of 53 programs for our own business. $398K realistic value. Get your matched list instantly.</div>
+    </div>
+    <a class="tool-url" href="https://readyclaw.nodenetwork.ai/runway">readyclaw.nodenetwork.ai/runway</a>
+  </div>
+</div>
+
+<!-- CHAPTER 4 - OPS AUDIT -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 4 &middot; Play 3</div>
+    <h2>Audit Your Operations for $50K+ in Waste</h2>
+  </div>
+  <div class="play-card">
+    <div class="play-number">Play 3 of 5</div>
+    <h3>Audit Your Operations for $50K+ in Waste</h3>
+    <p class="play-tagline">Find and eliminate the manual process waste most $500K&ndash;$5M businesses carry without knowing it. Target: $50,000+ in annual cost identified per audit. Immediate reduction visible within 30 days.</p>
+    <div class="play-section-label">Best for</div>
+    <ul>
+      <li>Founders who feel like the business is working hard but not getting faster</li>
+      <li>Companies with 5&ndash;50 employees and growing operational complexity</li>
+      <li>Anyone whose team keeps saying &ldquo;we need more people&rdquo; before processes have been optimized</li>
+    </ul>
+    <div class="play-section-label">The mechanics</div>
+    <p>Every $500K&ndash;$5M business carries operational drag. It shows up as: tasks that require a human to forward an email, reports assembled manually from tools that could talk directly, approval chains that delay work by 24&ndash;72 hours. None of this feels like waste because it&rsquo;s &ldquo;just how it works.&rdquo; An AI-powered audit maps it and prices the drag.</p>
+    <p><strong>Where the waste hides:</strong></p>
+    <ul>
+      <li><strong>Data handoffs:</strong> Anything that gets copy-pasted between tools (CRM &rarr; spreadsheet &rarr; report)</li>
+      <li><strong>Approval delays:</strong> Decisions that wait in someone&rsquo;s inbox instead of being automated</li>
+      <li><strong>Status update overhead:</strong> Time spent answering &ldquo;where is this?&rdquo; instead of doing the work</li>
+      <li><strong>Duplicate data entry:</strong> The same information entered into two or more systems</li>
+      <li><strong>Manual scheduling:</strong> Calendar coordination done by humans instead of automated booking tools</li>
+    </ul>
+    <div class="play-section-label">Launch checklist</div>
+    <ul class="checklist">
+      <li>List every recurring task your team does weekly &mdash; everything, including internal meetings</li>
+      <li>For each task: how long does it take, how often, could AI or automation handle it?</li>
+      <li>Identify the top 5 tasks by time-cost (hours/week &times; hourly rate)</li>
+      <li>Map the data flow: where does information enter your business and where does it go?</li>
+      <li>Find every manual handoff point &mdash; these are your automation opportunities</li>
+      <li>Calculate the annual cost of each manual process (time &times; hourly rate &times; 52 weeks)</li>
+      <li>Prioritize by: (1) highest cost, (2) easiest to automate, (3) lowest risk if AI gets it slightly wrong</li>
+    </ul>
+  </div>
+  <h3>Audit Framework</h3>
+  <div class="play-section-label">The 4-category scan</div>
+  <div class="script-box"><span class="script-label">OPERATIONAL WASTE SCAN</span>Category 1: COMMUNICATION OVERHEAD
+- How many hours/week does your team spend on internal status updates?
+- How many meetings could be replaced by a shared dashboard?
+- How many emails are "just checking in" on work that has no tracking system?
+
+Category 2: DATA MOVEMENT
+- How many times does the same data get re-entered into different tools?
+- What reports are assembled manually from tools that have APIs?
+- What would break if one person went on vacation for 2 weeks?
+
+Category 3: APPROVAL & DECISION DELAYS
+- What decisions require a senior person's sign-off that could be pre-approved by rule?
+- How long does the average approval take? What's the delay cost in revenue or speed?
+- Which approvals could be automated with a clear decision tree?
+
+Category 4: CUSTOMER-FACING FRICTION
+- How long does it take a new client to get onboarded from signed contract to active?
+- How many steps in your sales or fulfillment process require a human to move forward?
+- What do clients ask repeatedly that should be answered automatically?</div>
+  <div class="play-section-label">What to do with the audit findings</div>
+  <ol>
+    <li><strong>Tier 1 &mdash; Automate immediately:</strong> Tasks with $5,000+/year cost and clear automation path</li>
+    <li><strong>Tier 2 &mdash; Automate in 30 days:</strong> Tasks with $1,000&ndash;$5,000/year cost and moderate complexity</li>
+    <li><strong>Tier 3 &mdash; Eliminate:</strong> Tasks you do because you always have, not because they create value</li>
+    <li><strong>Tier 4 &mdash; Delegate to AI agent:</strong> Tasks with high frequency but low judgment requirement (see Play 1)</li>
+  </ol>
+  <div class="callout">
+    <strong>The math on one finding:</strong> A 3-person ops team spending 30 minutes per day on manual reporting = 7.5 hours/week at $40/hour = $15,600/year. One integration (Play 4) eliminates it permanently. The ROI on a $500 audit that finds this is 31x in year one.
+  </div>
+  <div class="tool-cta">
+    <div>
+      <div class="tool-name">Cash Flow Automation Audit &mdash; $500</div>
+      <div class="tool-desc">We run the full audit for you. Prioritized findings, implementation scope, and ROI estimates. Delivered in 3&ndash;5 business days.</div>
+    </div>
+    <a class="tool-url" href="https://cashflow.so/automation-audit">cashflow.so/automation-audit</a>
+  </div>
+</div>
+
+<!-- CHAPTER 5 - STACK INTEGRATION -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 5 &middot; Play 4</div>
+    <h2>Connect AI to Your Existing Stack</h2>
+  </div>
+  <div class="play-card">
+    <div class="play-number">Play 4 of 5</div>
+    <h3>Connect AI to Your Existing Stack</h3>
+    <p class="play-tagline">Bridge your disconnected tools with AI-powered integrations. Stop copying data between systems and start letting your stack work as one coordinated machine. Target: 10&ndash;30 hours/week of manual data movement eliminated.</p>
+    <div class="play-section-label">Best for</div>
+    <ul>
+      <li>Founders running 5+ SaaS tools that don&rsquo;t natively talk to each other</li>
+      <li>Teams where CRM, email, project management, and billing are all in separate systems</li>
+      <li>Anyone who has tried Zapier but hit limitations on complex, multi-step workflows</li>
+    </ul>
+    <div class="play-section-label">The mechanics</div>
+    <p>Modern businesses run on 15&ndash;30 SaaS tools on average. Those tools were not designed to work together. The result: humans become the connective tissue &mdash; manually moving data, translating formats, and triggering actions that should happen automatically. AI integration fixes this at the workflow level, not just the data level.</p>
+    <p><strong>The integration hierarchy (prioritize in this order):</strong></p>
+    <ul>
+      <li><strong>Level 1 &mdash; Native integrations:</strong> If Tool A and Tool B have a built-in connection, use it first. Zero cost, zero maintenance.</li>
+      <li><strong>Level 2 &mdash; API integrations:</strong> When native isn&rsquo;t available. Requires a developer or Integration Wizard configuration. One-time setup, perpetual value.</li>
+      <li><strong>Level 3 &mdash; AI middleware:</strong> When data needs transformation or judgment before it moves. An AI layer reads, interprets, and routes between systems.</li>
+      <li><strong>Level 4 &mdash; Agent-driven workflows:</strong> Full AI orchestration. An agent monitors inputs, triggers actions, and handles exceptions. (See Play 1.)</li>
+    </ul>
+    <div class="play-section-label">Launch checklist</div>
+    <ul class="checklist">
+      <li>List every tool your business runs (SaaS, cloud, internal apps) &mdash; even the legacy ones</li>
+      <li>Draw a data flow map: what information needs to move from where to where, and how often?</li>
+      <li>Identify the 3 most painful data handoffs (where humans are the connective tissue)</li>
+      <li>Check for native integrations first on all 3 &mdash; most founders don&rsquo;t know these exist</li>
+      <li>For gaps: determine if Level 2 (API) or Level 3 (AI middleware) is the right solution</li>
+      <li>Configure and test the first integration before moving to the second</li>
+      <li>Measure before and after: hours saved per week, error rate reduction</li>
+    </ul>
+  </div>
+  <h3>Integration Patterns That Work</h3>
+  <div class="play-section-label">High-impact integration patterns</div>
+  <div class="script-box"><span class="script-label">INTEGRATION PATTERN LIBRARY</span>Pattern 1: CRM → Project Management
+When a deal closes in your CRM, automatically create a project in your PM tool
+with the client name, contract value, and start date pre-filled.
+Tools: Salesforce/HubSpot → Asana/Linear/Notion
+Value: Eliminates 15–30 minutes of manual handoff per client.
+
+Pattern 2: Form Fill → CRM → Email Sequence
+When a form is submitted, create a CRM contact, score the lead,
+and trigger a personalized email sequence — no human in the loop.
+Tools: Typeform/Webflow → HubSpot/Close → Mailchimp/ActiveCampaign
+Value: Sub-5-minute lead response time, 24/7, zero labor cost.
+
+Pattern 3: Billing → Reporting → Slack
+When an invoice is paid, update your revenue dashboard and post
+a real-time notification to your finance Slack channel.
+Tools: Stripe → Notion/Google Sheets → Slack
+Value: Real-time revenue visibility without manual reporting.
+
+Pattern 4: Support Ticket → Knowledge Base → Resolution
+When a ticket arrives, check the knowledge base for a matching answer.
+If confidence is high, auto-respond. If low, route to human with context.
+Tools: Intercom/Zendesk → Notion/Confluence → AI layer
+Value: 40–70% of support tickets resolved without human intervention.</div>
+  <div class="play-section-label">Common integration mistakes</div>
+  <ul>
+    <li><strong>Integrating before cleaning data:</strong> Bad data in, bad data out. Deduplicate and standardize your CRM before connecting it to anything.</li>
+    <li><strong>Over-automating too fast:</strong> Test every integration manually for one week before turning off human oversight.</li>
+    <li><strong>No error alerting:</strong> Every integration needs a failure notification. Silent failures are the worst kind.</li>
+    <li><strong>Integrating what should be eliminated:</strong> Some workflows shouldn&rsquo;t be automated &mdash; they should be killed. Run Play 3 first if you&rsquo;re not sure.</li>
+  </ul>
+  <div class="callout accent">
+    <strong>The velocity multiplier:</strong> A team with a fully integrated stack moves 2&ndash;3x faster than one without. Not because they work harder &mdash; because they stop doing the same thing twice. Integration is the highest-leverage operational investment most businesses haven&rsquo;t made yet.
+  </div>
+  <div class="tool-cta">
+    <div>
+      <div class="tool-name">Integration Wizard &mdash; from $79</div>
+      <div class="tool-desc">Install guides, persona templates, and configuration checklists to connect your tools and automate your workflows. One-time download, no subscription.</div>
+    </div>
+    <a class="tool-url" href="https://integrationwizard.nodenetwork.ai">integrationwizard.nodenetwork.ai</a>
+  </div>
+</div>
+
+<!-- CHAPTER 6 - REVENUE SYSTEM -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 6 &middot; Play 5</div>
+    <h2>Build an AI-Powered Revenue System</h2>
+  </div>
+  <div class="play-card">
+    <div class="play-number">Play 5 of 5</div>
+    <h3>Build an AI-Powered Revenue System</h3>
+    <p class="play-tagline">Chain Plays 1&ndash;4 into a self-reinforcing revenue system where AI handles the pipeline, operations, and customer experience end-to-end. This is the compounding play. Target: measurable revenue increase within 90 days of full deployment.</p>
+    <div class="play-section-label">Best for</div>
+    <ul>
+      <li>Founders who have already implemented at least one of Plays 1&ndash;4</li>
+      <li>Businesses at $500K&ndash;$5M revenue with ambition to scale without proportional headcount growth</li>
+      <li>Operators who want to compete at a level that previously required 3&times; their current team size</li>
+    </ul>
+    <div class="play-section-label">The mechanics</div>
+    <p>Individual AI plays give you efficiency gains. An AI revenue <em>system</em> gives you compounding leverage. When your agent handles inbound (Play 1), your tools are integrated (Play 4), your operations are lean (Play 3), and your infrastructure is funded by credits (Play 2), the entire business runs faster &mdash; at lower cost &mdash; with better data.</p>
+    <p><strong>The four-layer AI revenue architecture:</strong></p>
+    <ul>
+      <li><strong>Layer 1 &mdash; Acquisition:</strong> AI handles lead capture, qualification, and initial outreach. Humans focus only on relationships and closing.</li>
+      <li><strong>Layer 2 &mdash; Operations:</strong> AI handles status updates, reporting, onboarding steps, and data movement. Humans focus on decisions and exceptions.</li>
+      <li><strong>Layer 3 &mdash; Retention:</strong> AI handles check-ins, usage monitoring, and renewal signals. Humans focus on relationships with accounts that need attention.</li>
+      <li><strong>Layer 4 &mdash; Intelligence:</strong> All layers feed data into a single revenue dashboard. You can see where leads stall, where clients churn, and where waste is highest &mdash; in real time.</li>
+    </ul>
+    <div class="play-section-label">Launch checklist</div>
+    <ul class="checklist">
+      <li>Confirm which of Plays 1&ndash;4 are already live and working in your business</li>
+      <li>Map the gaps: where does AI hand off to a human? Is that handoff necessary?</li>
+      <li>Identify the single highest-leverage automation not yet implemented</li>
+      <li>Design the intelligence layer: what metrics does the business need to see daily/weekly?</li>
+      <li>Build a revenue dashboard that pulls from your integrated stack (no manual updates)</li>
+      <li>Run a 30-day baseline: track revenue, cost per acquisition, and team time allocation</li>
+      <li>At day 30: identify the next bottleneck and assign it to the next play iteration</li>
+    </ul>
+  </div>
+  <h3>System Design Guide</h3>
+  <div class="play-section-label">Mapping your current AI coverage</div>
+  <div class="script-box"><span class="script-label">REVENUE SYSTEM COVERAGE MAP</span>For each stage of your revenue process, mark: Human / AI / Hybrid / Not happening
+
+ACQUISITION
+  Lead capture:          [ Human / AI / Hybrid / Not happening ]
+  Lead qualification:    [ Human / AI / Hybrid / Not happening ]
+  Initial outreach:      [ Human / AI / Hybrid / Not happening ]
+  Follow-up sequences:   [ Human / AI / Hybrid / Not happening ]
+  Proposal/quote:        [ Human / AI / Hybrid / Not happening ]
+
+OPERATIONS
+  Client onboarding:     [ Human / AI / Hybrid / Not happening ]
+  Status reporting:      [ Human / AI / Hybrid / Not happening ]
+  Invoice/billing:       [ Human / AI / Hybrid / Not happening ]
+  Support/triage:        [ Human / AI / Hybrid / Not happening ]
+
+RETENTION
+  Check-in cadence:      [ Human / AI / Hybrid / Not happening ]
+  Usage/health signals:  [ Human / AI / Hybrid / Not happening ]
+  Renewal/upsell:        [ Human / AI / Hybrid / Not happening ]
+
+Every "Human" that should be "AI" is a gap. Every "Not happening" is a risk.
+Prioritize gaps that appear early in the revenue funnel first.</div>
+  <div class="callout">
+    <strong>The compounding math:</strong> Play 1 saves $3,000/month in labor. Play 2 saves $5,000/month in credits. Play 3 reduces $50,000/year in waste. Play 4 saves 20 hours/week. Run all four: you&rsquo;ve added the equivalent of 2&ndash;3 full-time employees worth of capacity without the headcount cost. That&rsquo;s the revenue system.
+  </div>
+  <div class="tool-cta">
+    <div>
+      <div class="tool-name">The Full Readyclaw Ecosystem</div>
+      <div class="tool-desc">OpenClaw (agents) + Runway Intel Pack (credits) + Automation Audit + Integration Wizard. Everything you need to build and run an AI revenue system.</div>
+    </div>
+    <a class="tool-url" href="https://readyclaw.nodenetwork.ai">readyclaw.nodenetwork.ai</a>
+  </div>
+</div>
+
+<!-- CHAPTER 7 - 72-HOUR LAUNCH SPRINT -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Chapter 7</div>
+    <h2>72-Hour AI Launch Sprint</h2>
+  </div>
+  <p>This is your execution calendar. Run it in parallel with whichever play you selected. The sprint assumes you&rsquo;ve committed to one play and are starting at 8am on Day 1. The goal: your first AI system is live &mdash; tested, deployed, and producing output &mdash; by the end of Day 3.</p>
+  <div class="callout accent">
+    <strong>Go / No-Go rule:</strong> At the end of each day, ask: &ldquo;Did I complete the configuration work I planned? Did I run the required tests?&rdquo; If No on either &mdash; the bottleneck is execution speed, not the play. Get someone to help or reduce scope. Ship something smaller that works.
+  </div>
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-label">Day 1</span>
+      <span class="day-theme">Audit &amp; Select</span>
+    </div>
+    <ul class="day-tasks">
+      <li>
+        <span class="task-time">8:00&ndash;9:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Complete the AI Play Selector (Chapter 1). Commit to one play. Write it down. Tell your team. The mistake most founders make is staying in evaluation mode for two weeks instead of picking and executing.</span>
+      </li>
+      <li>
+        <span class="task-time">9:00&ndash;11:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Read your play chapter in full. Complete the full launch checklist on paper before touching any tool. Know what you&rsquo;re building before you build it.</span>
+      </li>
+      <li>
+        <span class="task-time">11:00&ndash;12:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Map the specific workflow you&rsquo;re targeting. Use the mapping template from your play chapter. If you can&rsquo;t describe the workflow in 5 steps, you don&rsquo;t know it well enough to automate it yet.</span>
+      </li>
+      <li>
+        <span class="task-time">12:00&ndash;14:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Gather access credentials for every tool involved in the workflow: login to the platforms, verify API access if needed, confirm you have permission to integrate or configure. Blocked access on Day 2 kills sprints.</span>
+      </li>
+      <li>
+        <span class="task-time">14:00&ndash;17:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Begin configuration. For Play 1: write the agent persona and checklist. For Play 2: submit the first two credit applications. For Play 3: run the 4-category waste scan. For Play 4: identify and test the first native integration.</span>
+      </li>
+      <li>
+        <span class="task-time">17:00&ndash;18:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Day 1 debrief: what did you configure? What is blocked? What needs to be done before Day 2 starts? Write tomorrow&rsquo;s first 3 tasks tonight &mdash; don&rsquo;t improvise the morning.</span>
+      </li>
+    </ul>
+  </div>
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-label">Day 2</span>
+      <span class="day-theme">Configure &amp; Test</span>
+    </div>
+    <ul class="day-tasks">
+      <li>
+        <span class="task-time">8:00&ndash;9:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Review Day 1 configuration. Is it complete enough to test? If not: what is the minimum viable version you can test today? Reduce scope if needed &mdash; a working smaller system beats a broken full system.</span>
+      </li>
+      <li>
+        <span class="task-time">9:00&ndash;12:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Complete configuration for Day 2 target. For Play 1: finish agent skill setup and prompt tuning. For Play 2: submit remaining tier-1 credit applications. For Play 3: price every finding and build the tier list. For Play 4: configure the first API integration end-to-end.</span>
+      </li>
+      <li>
+        <span class="task-time">12:00&ndash;14:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Run test scenarios. Use the test checklist from your play chapter. Document every failure. Do not fix failures during the test run &mdash; log them and fix after the full test is complete.</span>
+      </li>
+      <li>
+        <span class="task-time">14:00&ndash;15:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">&#9873; GO / NO-GO CHECK: Did you complete at least 70% of your play&rsquo;s launch checklist? Did you run at least 3 of the 5 test scenarios? If not &mdash; diagnose now. What took longer than expected? What do you need to cut to ship by Day 3?</span>
+      </li>
+      <li>
+        <span class="task-time">15:00&ndash;17:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Fix the test failures identified at midday. Re-run failed tests. Document what changed. Set a pass/fail threshold for Day 3 go-live: what must work for this to be worth deploying?</span>
+      </li>
+      <li>
+        <span class="task-time">17:00&ndash;18:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Day 2 debrief: Update your launch checklist. Log what&rsquo;s done, what&rsquo;s in progress, what&rsquo;s cut. Write tomorrow&rsquo;s deployment plan: what goes live, who needs to be notified, how will you measure success on Day 3.</span>
+      </li>
+    </ul>
+  </div>
+  <div class="day-block">
+    <div class="day-header">
+      <span class="day-label">Day 3</span>
+      <span class="day-theme">Launch &amp; Measure</span>
+    </div>
+    <ul class="day-tasks">
+      <li>
+        <span class="task-time">8:00&ndash;9:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Final pre-launch check: are all tests passing at your minimum threshold? Are all access credentials live? Is the failure notification set up? Do not launch without error alerting &mdash; silent failures are worse than no deployment.</span>
+      </li>
+      <li>
+        <span class="task-time">9:00&ndash;11:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Deploy. For Play 1: activate the agent on the first live workflow. For Play 2: confirm credit applications submitted and set follow-up reminders. For Play 3: present audit findings to the team. For Play 4: flip the integration live and monitor the first 10 data passes.</span>
+      </li>
+      <li>
+        <span class="task-time">11:00&ndash;14:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Monitor live. Keep an eye on the first outputs from your deployed system. Respond to any errors or unexpected behavior immediately. This is not the time to start configuring the next thing &mdash; watch what you just launched.</span>
+      </li>
+      <li>
+        <span class="task-time">14:00&ndash;16:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Measure Day 3 results against baseline. How many tasks did the AI handle? How long did each take? What was the error rate? Capture these numbers &mdash; they are your Week 1 benchmark.</span>
+      </li>
+      <li>
+        <span class="task-time">16:00&ndash;17:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Close the sprint. You have a working AI system. Document what you built: the workflow, the configuration, the test results. This documentation will let you replicate it or hand it off.</span>
+      </li>
+      <li>
+        <span class="task-time">17:00&ndash;18:00</span>
+        <span class="task-owner">YOU</span>
+        <span class="task-desc">Post-mortem: What took longer than expected? What would you do differently? What is the next play or the next workflow to automate? The sprint is done. The system is live. Now you iterate.</span>
+      </li>
+    </ul>
+  </div>
+  <div class="callout">
+    <strong>After 72 hours:</strong> You have a live AI system. Run it for 2 weeks before changing anything. Collect data. Let it stabilize. Then optimize. The mistake is tweaking configurations weekly before the system has had time to show you what it actually does at scale.
+  </div>
+</div>
+
+<!-- APPENDIX A - AI CREDIT STACK -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="chapter-header">
+    <div class="chapter-num">Appendix A</div>
+    <h2>The AI Credit Stack &mdash; $398K+ Available Right Now</h2>
+  </div>
+  <p>This appendix documents the specific programs we applied to and the results. Use it alongside Play 2. The numbers are real &mdash; we ran this ourselves.</p>
+
+  <h3>Tier 1 Programs (Apply First)</h3>
+  <p>These programs have the highest credit values and the most straightforward qualification criteria for $500K&ndash;$5M businesses.</p>
+  <table class="diagnostic-table">
+    <thead>
+      <tr>
+        <th>Program</th>
+        <th>Max Credits</th>
+        <th>Eligibility Notes</th>
+        <th>Apply</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>AWS Activate</strong></td>
+        <td>$100,000</td>
+        <td>Under 10 years old; bootstrapped or VC-backed tiers available</td>
+        <td>aws.amazon.com/activate</td>
+      </tr>
+      <tr>
+        <td><strong>Microsoft for Startups</strong></td>
+        <td>$150,000</td>
+        <td>Under 25 employees; under 10 years old; includes OpenAI API credits</td>
+        <td>microsoft.com/startups</td>
+      </tr>
+      <tr>
+        <td><strong>Google for Startups</strong></td>
+        <td>$200,000</td>
+        <td>Highest tier requires VC backing; $2K available without backing</td>
+        <td>cloud.google.com/startups</td>
+      </tr>
+      <tr>
+        <td><strong>Anthropic Startup Program</strong></td>
+        <td>Varies</td>
+        <td>AI-native companies; significant API credits for Claude usage</td>
+        <td>anthropic.com/startups</td>
+      </tr>
+      <tr>
+        <td><strong>OpenAI Startup Fund</strong></td>
+        <td>Varies</td>
+        <td>Apply via partners; credits plus advisory access</td>
+        <td>openai.com/startups</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Tier 2 Programs (Apply Week 2&ndash;3)</h3>
+  <p>Smaller credit values but fast approval and high acceptance rates. Stack these on top of Tier 1.</p>
+  <ul>
+    <li><strong>HubSpot for Startups</strong> &mdash; 90% discount on HubSpot plans for qualifying startups</li>
+    <li><strong>Stripe Atlas / Stripe Startup Deals</strong> &mdash; up to $20,000 in Stripe fee credits plus partner SaaS deals</li>
+    <li><strong>Notion for Startups</strong> &mdash; 6 months free Plus plan; extends to teams</li>
+    <li><strong>Intercom for Startups</strong> &mdash; 12 months free (up to $65K value) for early-stage companies</li>
+    <li><strong>Vercel / Netlify startup programs</strong> &mdash; significant hosting credit, useful if you run web products</li>
+    <li><strong>NVIDIA Inception</strong> &mdash; GPU compute credits and software licenses for AI-intensive workloads</li>
+    <li><strong>SBIR / STTR grants</strong> &mdash; federal grants of $50K&ndash;$2M for technology companies (non-dilutive)</li>
+  </ul>
+  <div class="callout accent">
+    <strong>Application sequencing matters:</strong> Apply to Tier 1 programs before Tier 2. Some Tier 2 programs use your Tier 1 status as a qualification signal. Being an accepted AWS Activate or Microsoft for Startups company makes other applications easier.
+  </div>
+
+  <hr>
+  <h3>Tracking Your Applications</h3>
+  <div class="play-section-label">Application tracker template</div>
+  <div class="script-box"><span class="script-label">CREDIT APPLICATION LOG</span>Program        | Applied | Status   | Credits     | Expiry    | Notes
+----------------|---------|----------|-------------|-----------|------------------
+AWS Activate    |         | Pending  | $___,___    |           |
+Microsoft       |         | Pending  | $___,___    |           |
+Google Cloud    |         | Pending  | $___,___    |           |
+Anthropic       |         | Pending  | $___,___    |           |
+OpenAI          |         | Pending  | $___,___    |           |
+HubSpot         |         | Pending  | $___,___    |           |
+Stripe Deals    |         | Pending  | $___,___    |           |
+Other:______    |         | Pending  | $___,___    |           |
+                |         |          |             |           |
+TOTAL APPROVED: $___,___    TOTAL PENDING: $___,___</div>
+  <div class="callout">
+    <strong>The 30-day rule:</strong> Set calendar reminders 60 days before any credit expires. Unused credits disappear. The biggest waste in the credit stack game is letting $50K in approved AWS credits expire because nobody was tracking the clock.
+  </div>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="page-break"></div>
+<div class="section" style="padding-top:4rem;text-align:center;">
+  <div style="color:#0a3d2b;font-size:2.5rem;font-weight:900;margin-bottom:1rem;">You have everything you need.</div>
+  <p style="color:#6b6b6b;font-size:1.1rem;max-width:480px;margin:0 auto 2rem;">The plays are ready. The tools are ready. The 72-hour sprint is mapped.<br>The only variable left is whether you start today.</p>
+  <div style="border-top:2px solid #0a3d2b;padding-top:1.5rem;display:inline-block;text-align:left;min-width:360px;">
+    <p style="font-family:'Arial',sans-serif;font-size:0.8rem;color:#6b6b6b;margin-bottom:0.3rem;">SELECTED PLAY</p>
+    <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:1.5rem;">____________________________________</p>
+    <p style="font-family:'Arial',sans-serif;font-size:0.8rem;color:#6b6b6b;margin-bottom:0.3rem;">DAY 1 START DATE</p>
+    <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:1.5rem;">____________________________________</p>
+    <p style="font-family:'Arial',sans-serif;font-size:0.8rem;color:#6b6b6b;margin-bottom:0.3rem;">REVENUE / COST TARGET (30-DAY)</p>
+    <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;">$___________________________________</p>
+  </div>
+  <div style="margin-top:2.5rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;font-family:'Arial',sans-serif;font-size:0.82rem;">
+    <div><strong style="color:#0a3d2b;">OpenClaw</strong><br><span style="color:#6b6b6b;">readyclaw.nodenetwork.ai</span></div>
+    <div><strong style="color:#0a3d2b;">Runway Intel Pack</strong><br><span style="color:#6b6b6b;">readyclaw.nodenetwork.ai/runway</span></div>
+    <div><strong style="color:#0a3d2b;">Automation Audit</strong><br><span style="color:#6b6b6b;">cashflow.so/automation-audit</span></div>
+    <div><strong style="color:#0a3d2b;">Integration Wizard</strong><br><span style="color:#6b6b6b;">integrationwizard.nodenetwork.ai</span></div>
+  </div>
+  <div style="margin-top:3rem;font-family:'Arial',sans-serif;font-size:0.75rem;color:#9b9b9b;">
+    The AI Revenue Playbook &mdash; Readyclaw &middot; Digital Edition &middot; $47 One-Time
+  </div>
+</div>
+
+</body>
+</html>

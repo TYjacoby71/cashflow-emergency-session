@@ -9,9 +9,10 @@
 #   https://<site>.netlify.app/.netlify/functions/stripe-webhook
 # Required env vars (set in Netlify dashboard > Site settings > Environment):
 #   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, EMAIL_API_KEY, FROM_EMAIL
-#   DOWNLOAD_URL = https://<site>.netlify.app/emergency-cashflow-playbook.pdf
-#   (PDF is deployed at src/emergency-cashflow-playbook.pdf → published as /emergency-cashflow-playbook.pdf)
+#   DOWNLOAD_URL = https://<site>.netlify.app/ai-revenue-playbook.html
+#   (Rebranded playbook at src/ai-revenue-playbook.html → published as /ai-revenue-playbook.html)
+#   (Legacy: emergency-cashflow-playbook.pdf also present but has old content — do not use for DOWNLOAD_URL)
 #
-# Stripe product: prod_UIdeG7Tr41hRjx (Emergency Cashflow Playbook, $47)
+# Stripe product: prod_UIdeG7Tr41hRjx (rename to "The AI Revenue Playbook" via Stripe dashboard)
 # Stripe price:   price_1TK2NCFU1PN3YsywokmbnLwL
 # Payment link:   https://buy.stripe.com/14AbJ180Nff4dMQ94f3ZK08
