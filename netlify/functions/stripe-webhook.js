@@ -7,9 +7,7 @@
  * Environment variables required (set in Netlify dashboard > Site settings > Environment):
  *   STRIPE_SECRET_KEY       — sk_live_... (Stripe secret key)
  *   STRIPE_WEBHOOK_SECRET   — whsec_... (from Stripe dashboard > Webhooks)
- *   EMAIL_SERVICE           — "sendgrid" | "mailgun" | "smtp" (set when email provider is confirmed)
- *   EMAIL_API_KEY           — API key for the chosen email service
- *   FROM_EMAIL              — hello@cashflow.so
+ *   POSTMARK_API_TOKEN      — (postmark-token-rotated)
  *   DOWNLOAD_URL            — The URL of the digital product PDF/ZIP to deliver
  *                             (set after CMO finalizes the digital product — NOD-132)
  *
@@ -21,26 +19,24 @@
  */
 
 const stripe = require('stripe');
+const postmark = require('postmark');
 
-// TODO: replace with real email sender once NOD-66 email identity is resolved
 async function sendDeliveryEmail({ to, customerName, downloadUrl }) {
-  // Placeholder — wire to SendGrid/Mailgun/SMTP when credentials are available
-  console.log(`[DELIVERY] Would send to ${to} (${customerName}): ${downloadUrl}`);
-  // Example SendGrid implementation (uncomment when ready):
-  //
-  // const sgMail = require('@sendgrid/mail');
-  // sgMail.setApiKey(process.env.EMAIL_API_KEY);
-  // await sgMail.send({
-  //   to,
-  //   from: process.env.FROM_EMAIL,
-  //   subject: 'Your Emergency Cashflow Playbook is ready',
-  //   html: `
-  //     <p>Hi ${customerName},</p>
-  //     <p>Your purchase is confirmed. Access your playbook here:</p>
-  //     <p><a href="${downloadUrl}">${downloadUrl}</a></p>
-  //     <p>This link is active for 72 hours. Reply to this email if you have any issues.</p>
-  //   `
-  // });
+  const client = new postmark.ServerClient(process.env.POSTMARK_API_TOKEN);
+  await client.sendEmail({
+    From: 'AI Rev Playbook <hello@nodenetwork.ai>',
+    To: to,
+    Subject: 'Your AI Revenue Playbook is ready',
+    HtmlBody: `
+      <p>Hi ${customerName},</p>
+      <p>Your purchase is confirmed. Access your playbook here:</p>
+      <p><a href="${downloadUrl}">${downloadUrl}</a></p>
+      <p>This link is active for 72 hours. Reply to this email if you have any issues.</p>
+      <p>— The NodNetwork team</p>
+    `,
+    TextBody: `Hi ${customerName},\n\nYour purchase is confirmed. Access your playbook here:\n${downloadUrl}\n\nThis link is active for 72 hours. Reply to this email if you have any issues.\n\n— The NodNetwork team`,
+    MessageStream: 'outbound',
+  });
 }
 
 exports.handler = async (event) => {

@@ -4,6 +4,7 @@
   "private": true,
   "description": "Emergency Cashflow Command Session — landing page and delivery automation",
   "dependencies": {
+    "postmark": "^4.0.5",
     "stripe": "^14.0.0"
   },
   "devDependencies": {},
