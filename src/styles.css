@@ -110,6 +110,13 @@ h1 {
 .btn-primary { background: #fff; color: var(--teal-dark); }
 .btn-large { font-size: 1.1rem; padding: 1.1rem 2.2rem; }
 
+.security-note {
+  margin: 0.75rem 0 0;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+
 .guarantee {
   margin: 1.2rem 0 0.5rem;
   font-size: 0.9rem;
