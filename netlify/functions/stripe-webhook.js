@@ -8,8 +8,8 @@
  *   STRIPE_SECRET_KEY       — sk_live_... (Stripe secret key)
  *   STRIPE_WEBHOOK_SECRET   — whsec_... (from Stripe dashboard > Webhooks)
  *   POSTMARK_API_TOKEN      — (set in Netlify dashboard, never commit the value)
- *   DOWNLOAD_URL            — The URL of the digital product PDF/ZIP to deliver
- *                             (set after CMO finalizes the digital product — NOD-132)
+ *   DOWNLOAD_URL            — The URL of the digital product PDF to deliver
+ *                             e.g. https://<site>.netlify.app/ai-revenue-playbook.pdf
  *
  * Stripe webhook setup:
  *   1. Go to https://dashboard.stripe.com/webhooks
@@ -31,10 +31,10 @@ async function sendDeliveryEmail({ to, customerName, downloadUrl }) {
       <p>Hi ${customerName},</p>
       <p>Your purchase is confirmed. Access your playbook here:</p>
       <p><a href="${downloadUrl}">${downloadUrl}</a></p>
-      <p>This link is active for 72 hours. Reply to this email if you have any issues.</p>
+      <p>This link is permanent &mdash; bookmark it for future access. Reply to this email if you have any questions.</p>
       <p>— The NodNetwork team</p>
     `,
-    TextBody: `Hi ${customerName},\n\nYour purchase is confirmed. Access your playbook here:\n${downloadUrl}\n\nThis link is active for 72 hours. Reply to this email if you have any issues.\n\n— The NodNetwork team`,
+    TextBody: `Hi ${customerName},\n\nYour purchase is confirmed. Access your playbook here:\n${downloadUrl}\n\nThis link is permanent — bookmark it for future access. Reply to this email if you have any questions.\n\n— The NodNetwork team`,
     MessageStream: 'outbound',
   });
 }
@@ -68,12 +68,6 @@ exports.handler = async (event) => {
     if (!customerEmail) {
       console.error('No customer email in session:', session.id);
       return { statusCode: 200, body: 'OK (no email)' };
-    }
-
-    if (!downloadUrl) {
-      // TODO: remove this guard once DOWNLOAD_URL is set (NOD-132 — CMO finalizing product)
-      console.warn('DOWNLOAD_URL not set. Delivery skipped for session:', session.id);
-      return { statusCode: 200, body: 'OK (delivery pending product URL)' };
     }
 
     try {
